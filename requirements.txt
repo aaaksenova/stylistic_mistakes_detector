@@ -80,8 +80,10 @@ ptyprocess==0.7.0
 pyarrow==6.0.0
 pyaspeller==0.2.0
 pycparser==2.20
+pydantic==1.8.2
 pydeck==0.7.1
 Pygments==2.10.0
+pymorphy2==0.8
 pymorphy2-dicts==2.4.393442.3710985
 pymorphy2-dicts-ru==2.4.417127.4579844
 pyparsing==2.4.7
@@ -96,7 +98,7 @@ QtPy==1.11.2
 razdel==0.5.0
 regex==2021.8.28
 requests==2.26.0
-ru-core-news-md @ https://github.com/explosion/spacy-models/releases/download/ru_core_news_md-3.0.0/ru_core_news_md-3.0.0-py3-none-any.whl
+ru-core-news-md @ https://github.com/explosion/spacy-models/releases/download/ru_core_news_md-3.1.0/ru_core_news_md-3.1.0-py3-none-any.whl
 ru-word2number==1.1
 rutermextract==0.3
 ruts==0.8.0
@@ -111,7 +113,7 @@ smart-open==5.2.1
 smmap==5.0.0
 sortedcontainers==2.4.0
 soupsieve==2.2.1
-spacy==3.0.0
+spacy==3.1.2
 spacy-legacy==3.0.8
 srsly==2.4.1
 streamlit==1.1.0
@@ -135,4 +137,3 @@ wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
 yarg==0.1.9
-yargy==0.12.0
