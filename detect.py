@@ -3,10 +3,10 @@ import numpy as np
 import re
 import spacy
 from pyaspeller import YandexSpeller
-from extractor import NumberExtractor
+# from extractor import NumberExtractor
 
 speller = YandexSpeller()
-extractor = NumberExtractor()
+# extractor = NumberExtractor()
 model = spacy.load('ru_core_news_md')
 
 # Словарь сложных слов:
@@ -46,8 +46,8 @@ def format_text(text):
     text = re.sub(' %', '%', text)  # убираем пробел перед %
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
     spell_checked = speller.spelled(text)  # Исправляем орфографию
-    final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
-    return final
+    # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
+    return spell_checked
 
 
 def highlight_bad_words(text):
