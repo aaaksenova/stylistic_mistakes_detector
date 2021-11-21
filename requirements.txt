@@ -80,7 +80,6 @@ ptyprocess==0.7.0
 pyarrow==6.0.0
 pyaspeller==0.2.0
 pycparser==2.20
-pydantic==1.8.2
 pydeck==0.7.1
 Pygments==2.10.0
 pymorphy2-dicts==2.4.393442.3710985
