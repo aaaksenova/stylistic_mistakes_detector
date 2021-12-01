@@ -144,6 +144,8 @@ def highlight_verbs(text):
                 if len(curr_pattern) >= 3:
                     verb_patterns.append(doc[curr_pattern[0]].text + '.+' + doc[curr_pattern[-1]].text)
                 curr_pattern = []
+        if len(curr_pattern) >= 3:
+            verb_patterns.append(doc[curr_pattern[0]].text + '.+' + doc[curr_pattern[-1]].text)
         if verb_patterns:
             for pattern in verb_patterns:
                 sentence_upd = re.sub(r'(' + pattern + r')', r'START\1STOP', sentence_upd)  # \\034[34m # \\034[0m
@@ -169,6 +171,8 @@ def highlight_nouns(text):
                 if len(curr_pattern) >= 3:
                     noun_patterns.append(' '.join([doc[curr_pattern[i]].text for i in range(len(curr_pattern))]))
                 curr_pattern = []
+        if len(curr_pattern) >= 3:
+            noun_patterns.append(doc[curr_pattern[0]].text + '.+' + doc[curr_pattern[-1]].text)
         if noun_patterns:
             for pattern in noun_patterns:
                 sentence_upd = re.sub(r'(' + pattern + r')', r'START\1STOP', sentence_upd)  # \\034[34m # \\034[0m
