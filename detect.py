@@ -168,6 +168,6 @@ def highlight_part(text):
             for pattern in particip_patterns:
                 sentence_upd = re.sub(r'(' + pattern + r')', r'start\1stop', sentence_upd)  # \\034[34m # \\034[0m
         text_upd.append(sentence_upd)
-        text = '. '.join(text_upd)
-        text = text.replace('start', '''<span style="color:Purple;">''').replace('stop', '</span>')
+    text = '. '.join(text_upd)
+    text = text.replace('start', '''<span style="color:Purple;">''').replace('stop', '</span>')
     return text
