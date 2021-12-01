@@ -11,7 +11,7 @@ speller = YandexSpeller()
 model = spacy.load('ru_core_news_md')
 
 # Словарь сложных слов:
-stop_words = """эквайринг, полученный, абсолютно, действительно, гарантированно, очень, необходимый, \
+stop_words = """эквайринг, полученный, абсолютно, действительно, гарантированно, очень, необходимый, необходимо, \
 самый, наиболее, являться, осуществляться, производить, осуществлять, производиться, надлежащий, данный, соответствующий, \
 максимально, совершение, совершить, произвести, надлежащий, данное, списание, оказание, реальный"""
 stop_phrases = """не требуется, на предмет, \
@@ -68,10 +68,12 @@ def format_text(text):
 
 def highlight_bad_words(text):
     sents = text.split('.')
+    detected = []
     for sent in sents:
         doc = model(sent)
         for w in doc:
-            if w.lemma_ in stop_words.keys():
+            if w.lemma_ in stop_words.keys() and w.text not in detected:
+                detected.append(w.text)
                 text = re.sub(w.text, '''<span class="words" style="color:green">''' + w.text + '</span>', text)
     for stop_phrase in stop_phrases.split(', '):
         text = re.sub(stop_phrase, '''<span class="words" style="color:green">''' + stop_phrase + '</span>', text)
