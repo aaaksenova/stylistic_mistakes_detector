@@ -55,6 +55,7 @@ def complexity_analytics(text):
 def format_text(text):
     text = re.sub(' %', '%', text)  # убираем пробел перед %
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
+    text = re.sub(' - это', ' – это', text)
     spell_checked = speller.spelled(text)  # Исправляем орфографию
     # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
     return spell_checked
