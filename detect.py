@@ -32,8 +32,12 @@ def complexity_analytics(text):
     # warnings = []
     delta = (real_values['flesch_kincaid_grade'] + real_values['automated_readability_index']) / 2 - \
             (standard_values['flesch_kincaid_grade'] + standard_values['automated_readability_index']) / 2
+    sent_lens = max([len(sent.split()) for sent in text.split('. ')])
+    warn_text = []
     if delta > 1:
-        warn_text = ['Текст перегружен. Возможно, стоит сократить предложения.']
+        warn_text.append('Текст перегружен.')
+    if sent_lens > 15:
+        warn_text.append('Предложения длинее 15 слов лучше разбивать на более короткие.')
     # for metric in real_values.keys():
     #     if real_values[metric] > standard_values[metric] + 1:
     #         warnings.append((metric, real_values[metric] - standard_values[metric]))
@@ -42,7 +46,7 @@ def complexity_analytics(text):
     #     for metric, value in warnings:
     #         warn_text.append("**" + metric.capitalize() + "** на " + str(round(value)) + " больше нормального значения")
     else:
-        warn_text = ['Все метрики соблюдены']
+        warn_text.append('Все метрики соблюдены')
     return warn_text
 
 
