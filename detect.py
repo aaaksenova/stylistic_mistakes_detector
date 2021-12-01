@@ -153,6 +153,31 @@ def highlight_verbs(text):
     return text
 
 
+def highlight_nouns(text):
+    sentences = text.split('. ')
+
+    text_upd = []
+    for sentence in sentences:
+        sentence_upd = sentence
+        doc = model(sentence)
+        noun_patterns = []
+        curr_pattern = []
+        for tok_idx in range(len(doc)):
+            if doc[tok_idx].pos_ == 'VERB':
+                curr_pattern.append(tok_idx)
+            else:
+                if len(curr_pattern) >= 3:
+                    noun_patterns.append(doc[curr_pattern[0]].text + '.+' + doc[curr_pattern[-1]].text)
+                curr_pattern = []
+        if noun_patterns:
+            for pattern in noun_patterns:
+                sentence_upd = re.sub(r'(' + pattern + r')', r'START\1STOP', sentence_upd)  # \\034[34m # \\034[0m
+        text_upd.append(sentence_upd)
+        text = '. '.join(text_upd)
+        text = text.replace('START', '''<span style="color:orange;">''').replace('STOP', '</span>')
+    return text
+
+
 def highlight_part(text):
     sentences = text.split('. ')
 
