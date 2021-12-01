@@ -64,7 +64,7 @@ def format_text(text):
     #text = re.sub(r'вашин', r'Вашин', text)
     # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
     text = '. '.join([sent.capitalize() for sent in text.split('. ')])
-    text_new = text.strip()
+    text_new = text.strip('.')
     flag_punct = 0
     if text_new != text:
         flag_punct = 1
