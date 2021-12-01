@@ -21,7 +21,8 @@ if submit_button:
         formatted = detect.format_text(text_to_check)
         bad_checked = detect.highlight_bad_words(formatted)
         passive_checked = detect.highlight_passive(bad_checked)
-        output = detect.highlight_part(passive_checked)
+        particips = detect.highlight_part(passive_checked)
+        output = detect.highlight_verbs(particips)
         st.write("""*Спасибо за ожидание! Вот, что получилось:*""")
         for metric in metrics:
             st.markdown(metric)

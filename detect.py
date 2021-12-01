@@ -12,7 +12,7 @@ model = spacy.load('ru_core_news_md')
 
 # Словарь сложных слов:
 stop_words = """эквайринг, полученный, абсолютно, действительно, гарантированно, очень, необходимо, необходимый, \
-самый, наиболее, являться, осуществляться, производиться, надлежащий, данный, соответствующий, \
+самый, наиболее, являться, осуществляться, производить, осуществлять, производиться, надлежащий, данный, соответствующий, \
 максимально, совершение, совершить, произвести, надлежащий, данное, списание, оказание, реальный"""
 stop_phrases = """не требуется, на предмет, \
 в целях, в настоящее время, в рамках, во избежание, в связи, по причине, в случае, таким образом, на текущий момент"""
@@ -72,11 +72,11 @@ def highlight_bad_words(text):
         doc = model(sent)
         for w in doc:
             if w.lemma_ in stop_words.keys():
-                text = re.sub(w.text, '''<a class="words" style="background-color: rgba(255, 255, 128, .5)">''' + w.text + '</a>', text)
+                text = re.sub(w.text, '''<span class="words" style="color:green">''' + w.text + '</span>', text)
     for stop_phrase in stop_phrases.split(', '):
-        text = re.sub(stop_phrase, '''<a class="words" style="background-color: rgba(255, 255, 128, .5)">''' + stop_phrase + '</a>', text)
+        text = re.sub(stop_phrase, '''<span class="words" style="color:green">''' + stop_phrase + '</span>', text)
         text = re.sub(stop_phrase.capitalize(), \
-                      '''<a class="words" style="background-color: rgba(255, 255, 128, .5)">''' + stop_phrase.capitalize() + '</a>', text)
+                      '''<span class="words" style="color:green">''' + stop_phrase.capitalize() + '</span>', text)
     return text
 
 
@@ -123,6 +123,31 @@ def highlight_passive(text):
         text_upd.append(sentence_upd)
         text = '. '.join(text_upd)
         text = text.replace('start', '''<span style="color:blue">''').replace('stop', '</span>')
+    return text
+
+
+def highlight_verbs(text):
+    sentences = text.split('. ')
+
+    text_upd = []
+    for sentence in sentences:
+        sentence_upd = sentence
+        doc = model(sentence)
+        verb_patterns = []
+        curr_pattern = []
+        for tok_idx in range(len(doc)):
+            if doc[tok_idx].pos_ == 'VERB':
+                curr_pattern.append(tok_idx)
+            else:
+                if len(curr_pattern) >= 3:
+                    verb_patterns.append(doc[curr_pattern[0]].text + '.+' + doc[curr_pattern[-1]].text)
+                curr_pattern = []
+        if verb_patterns:
+            for pattern in verb_patterns:
+                sentence_upd = re.sub(r'(' + pattern + r')', r'START\1STOP', sentence_upd)  # \\034[34m # \\034[0m
+        text_upd.append(sentence_upd)
+        text = '. '.join(text_upd)
+        text = text.replace('START', '''<span style="color:red;">''').replace('STOP', '</span>')
     return text
 
 
