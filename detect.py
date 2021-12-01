@@ -11,7 +11,7 @@ speller = YandexSpeller()
 model = spacy.load('ru_core_news_md')
 
 # Словарь сложных слов:
-stop_words = """эквайринг, полученный, абсолютно, действительно, гарантированно, очень, необходимо, необходимый, \
+stop_words = """эквайринг, полученный, абсолютно, действительно, гарантированно, очень, необходимый, \
 самый, наиболее, являться, осуществляться, производить, осуществлять, производиться, надлежащий, данный, соответствующий, \
 максимально, совершение, совершить, произвести, надлежащий, данное, списание, оказание, реальный"""
 stop_phrases = """не требуется, на предмет, \
@@ -121,8 +121,8 @@ def highlight_passive(text):
             for pattern in patterns:
                 sentence_upd = re.sub(r'(' + pattern + r')', r'start\1stop', sentence_upd)  # \\034[34m # \\034[0m
         text_upd.append(sentence_upd)
-        text = '. '.join(text_upd)
-        text = text.replace('start', '''<span style="color:blue">''').replace('stop', '</span>')
+    text = '. '.join(text_upd)
+    text = text.replace('start', '''<span style="color:blue">''').replace('stop', '</span>')
     return text
 
 
