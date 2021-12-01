@@ -60,7 +60,7 @@ def format_text(text):
     you_list = ['Вы', 'Вас', 'Вам', 'Вами'] #'Ваш', 'Вашего','Вашему', 'Вашем', 'Ваше', 'Вашим', 'Ваша', 'Вашей', 'Вашу']
     for i in you_list:  # Меняем Вы на нижний регистр
         text = re.sub(r'\b{}\b'.format(i), r'\b{}\b'.format(i.lower()), text)
-    text = re.sub(r'Ваш^(ин)', r'ваш', text) # Меняем Ваш на нижний регистр
+    text = re.sub(r'Ваш(^ин)', r'ваш', text) # Меняем Ваш на нижний регистр
     #text = re.sub(r'вашин', r'Вашин', text)
     # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
     return text
