@@ -20,12 +20,12 @@ stop_words = {word: ' '.join([w.lemma_ for w in model(word)]) for word in stop_w
 
 
 def complexity_analytics(text):
-    standard_values = {'flesch_kincaid_grade': 5.610294117647054,
+    standard_values = {'flesch_kincaid_grade': 10,
                        'flesch_reading_easy': 47.30264705882351,
                        'coleman_liau_index': 9.27248529411765,
                        'smog_index': 12.553279569776885,
-                       'automated_readability_index': 9.27248529411765,
-                       'lix': 55.55882352941177}
+                       'automated_readability_index': 10,
+                       'lix': 10}
     rs = ReadabilityStats(text)
     real_values = rs.get_stats()
     real_values['flesch_reading_easy'] = -real_values['flesch_reading_easy']
@@ -56,9 +56,8 @@ def highlight_bad_words(text):
         doc = model(sent)
         for w in doc:
             if w.lemma_ in stop_words.keys():
-                text = re.sub(w.text, '''<span style="color:green"> ''' + w.text + '</span>', text)
+                text = re.sub(w.text, '''<span style="color:green">''' + w.text + '</span>', text)
     return text
-
 
 # function to check the type of sentence
 def checkForSentType(inputSentence):
@@ -91,30 +90,39 @@ def checkForSentType(inputSentence):
 
 
 def highlight_passive(text):
-    sentences = text.split('.')
 
+    sentences = text.split('. ')
+    text_upd = []
     # checking each sentence for its type
     for sentence in sentences:
         patterns = checkForSentType(str(sentence))
+        sentence_upd = sentence
         if patterns:
             for pattern in patterns:
-                text = re.sub(r'(' + pattern + r')', r'start \1stop', text)  # \\034[34m # \\034[0m
-        text = text.replace('start', '''<span style="color:blue"> ''').replace('stop', '</span>')
+                sentence_upd = re.sub(r'(' + pattern + r')', r'start\1stop', sentence_upd)  # \\034[34m # \\034[0m
+        text_upd.append(sentence_upd)
+        text = '. '.join(text_upd)
+        text = text.replace('start', '''<span style="color:blue">''').replace('stop', '</span>')
     return text
 
 
 def highlight_part(text):
-    sentences = text.split('.')
+    sentences = text.split('. ')
 
     particip_patterns = []
+    text_upd = []
     for sentence in sentences:
+        sentence_upd = sentence
         doc = model(sentence)
         for token in doc:
             if token.morph.get("VerbForm"):
                 if token.morph.get("VerbForm")[0] in ['Part', 'Conv'] and token.dep_ in ['acl', 'advcl']:
                     particip_patterns.append(token.text)
+                    print(particip_patterns)
         if particip_patterns:
             for pattern in particip_patterns:
-                text = re.sub(r'(' + pattern + r')', r'start \1stop', text)  # \\034[34m # \\034[0m
-        text = text.replace('start', '''<span style="color:Purple;"> ''').replace('stop', '</span>')
+                sentence_upd = re.sub(r'(' + pattern + r')', r'start\1stop', sentence_upd)  # \\034[34m # \\034[0m
+        text_upd.append(sentence_upd)
+        text = '. '.join(text_upd)
+        text = text.replace('start', '''<span style="color:Purple;">''').replace('stop', '</span>')
     return text
