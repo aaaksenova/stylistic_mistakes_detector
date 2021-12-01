@@ -3,6 +3,7 @@ import numpy as np
 import re
 import spacy
 from pyaspeller import YandexSpeller
+
 # from extractor import NumberExtractor
 
 speller = YandexSpeller()
@@ -10,11 +11,11 @@ speller = YandexSpeller()
 model = spacy.load('ru_core_news_md')
 
 # Словарь сложных слов:
-stop_words = """эквайринг, абсолютно, действительно, гарантированно, очень, \
-самый, наиболее, являться, осуществляться, производиться, надлежащий, данный, \
-максимально, совершение, совершить, произвести, надлежащий, данное, проинформировать"""
-stop_phrases = """денежные средства, провести соответствующее мероприятие, не требуется, на предмет взаимодействия, \
-в целях, в настоящее время, в рамках, во избежание, в связи, по причине, в случае"""
+stop_words = """эквайринг, абсолютно, действительно, гарантированно, очень, необходимо, необходимый, \
+самый, наиболее, являться, осуществляться, производиться, надлежащий, данный, соответствующий, \
+максимально, совершение, совершить, произвести, надлежащий, данное, списание, оказание, реальный"""
+stop_phrases = """таким образом, не требуется, на предмет, \
+в целях, в настоящее время, в рамках, во избежание, в связи, по причине, в случае, таким образом, на текущий момент"""
 stop_words = stop_words.split(', ')
 stop_words = {word: ' '.join([w.lemma_ for w in model(word)]) for word in stop_words}
 
@@ -36,6 +37,8 @@ def complexity_analytics(text):
     warn_text = []
     if delta > 1:
         warn_text.append('Текст перегружен.')
+    else:
+        warn_text.append('Все метрики соблюдены')
     if sent_lens > 15:
         warn_text.append('Предложения длинее 15 слов лучше разбивать на более короткие.')
     # for metric in real_values.keys():
@@ -45,8 +48,7 @@ def complexity_analytics(text):
     #     warn_text = []
     #     for metric, value in warnings:
     #         warn_text.append("**" + metric.capitalize() + "** на " + str(round(value)) + " больше нормального значения")
-    else:
-        warn_text.append('Все метрики соблюдены')
+
     return warn_text
 
 
@@ -65,7 +67,12 @@ def highlight_bad_words(text):
         for w in doc:
             if w.lemma_ in stop_words.keys():
                 text = re.sub(w.text, '''<span style="color:green">''' + w.text + '</span>', text)
+    for stop_phrase in stop_phrases.split(', '):
+        text = re.sub(stop_phrase, '''<span style="color:green">''' + stop_phrase + '</span>', text)
+        text = re.sub(stop_phrase.capitalize(), \
+                      '''<span style="color:green">''' + stop_phrase.capitalize() + '</span>', text)
     return text
+
 
 # function to check the type of sentence
 def checkForSentType(inputSentence):
@@ -98,7 +105,6 @@ def checkForSentType(inputSentence):
 
 
 def highlight_passive(text):
-
     sentences = text.split('. ')
     text_upd = []
     # checking each sentence for its type
