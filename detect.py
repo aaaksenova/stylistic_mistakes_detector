@@ -74,11 +74,11 @@ def highlight_bad_words(text):
         for w in doc:
             if w.lemma_ in stop_words.keys() and w.text not in detected:
                 detected.append(w.text)
-                text = re.sub(w.text, '''<span class="words" style="color:green">''' + w.text + '</span>', text)
+                text = re.sub(w.text, '''<span style="color:green">''' + w.text + '</span>', text)
     for stop_phrase in stop_phrases.split(', '):
-        text = re.sub(stop_phrase, '''<span class="words" style="color:green">''' + stop_phrase + '</span>', text)
+        text = re.sub(stop_phrase, '''<span style="color:green">''' + stop_phrase + '</span>', text)
         text = re.sub(stop_phrase.capitalize(), \
-                      '''<span class="words" style="color:green">''' + stop_phrase.capitalize() + '</span>', text)
+                      '''<span style="color:green">''' + stop_phrase.capitalize() + '</span>', text)
     return text
 
 
