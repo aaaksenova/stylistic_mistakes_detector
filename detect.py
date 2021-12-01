@@ -138,7 +138,7 @@ def highlight_verbs(text):
         verb_patterns = []
         curr_pattern = []
         for tok_idx in range(len(doc)):
-            if doc[tok_idx].pos_ == 'VERB':
+            if doc[tok_idx].pos_ == 'VERB' and doc[tok_idx].text.isalpha():
                 curr_pattern.append(tok_idx)
             else:
                 if len(curr_pattern) >= 3:
@@ -148,8 +148,8 @@ def highlight_verbs(text):
             for pattern in verb_patterns:
                 sentence_upd = re.sub(r'(' + pattern + r')', r'START\1STOP', sentence_upd)  # \\034[34m # \\034[0m
         text_upd.append(sentence_upd)
-        text = '. '.join(text_upd)
-        text = text.replace('START', '''<span style="color:red;">''').replace('STOP', '</span>')
+    text = '. '.join(text_upd)
+    text = text.replace('START', '''<span style="color:red;">''').replace('STOP', '</span>')
     return text
 
 
@@ -163,18 +163,18 @@ def highlight_nouns(text):
         noun_patterns = []
         curr_pattern = []
         for tok_idx in range(len(doc)):
-            if doc[tok_idx].pos_ == 'NOUN':
+            if doc[tok_idx].pos_ == 'NOUN' and doc[tok_idx].text.isalpha():
                 curr_pattern.append(tok_idx)
             else:
                 if len(curr_pattern) >= 3:
-                    noun_patterns.append(doc[curr_pattern[0]].text + '.+' + doc[curr_pattern[-1]].text)
+                    noun_patterns.append(' '.join([doc[curr_pattern[i]].text for i in range(len(curr_pattern))]))
                 curr_pattern = []
         if noun_patterns:
             for pattern in noun_patterns:
                 sentence_upd = re.sub(r'(' + pattern + r')', r'START\1STOP', sentence_upd)  # \\034[34m # \\034[0m
         text_upd.append(sentence_upd)
-        text = '. '.join(text_upd)
-        text = text.replace('START', '''<span style="color:orange;">''').replace('STOP', '</span>')
+    text = '. '.join(text_upd)
+    text = text.replace('START', '''<span style="color:orange;">''').replace('STOP', '</span>')
     return text
 
 
