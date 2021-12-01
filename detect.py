@@ -184,6 +184,8 @@ def highlight_nouns(text):
         text_upd.append(sentence_upd)
     text = '. '.join(text_upd)
     text = text.replace('START', '''<span style="color:orange;">''').replace('STOP', '</span>')
+    text = re.sub(r'(' + r'[Пп]ри \w+ии\b' + r')', r'START\1STOP', text)
+    text = text.replace('START', '''<span style="color:orange;">''').replace('STOP', '</span>')
     return text
 
 
