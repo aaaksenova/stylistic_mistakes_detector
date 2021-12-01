@@ -163,7 +163,7 @@ def highlight_part(text):
             if token.morph.get("VerbForm"):
                 if token.morph.get("VerbForm")[0] in ['Part', 'Conv'] and token.dep_ in ['acl', 'advcl']:
                     particip_patterns.append(token.text)
-                    print(particip_patterns)
+        particip_patterns = list(set(particip_patterns))
         if particip_patterns:
             for pattern in particip_patterns:
                 sentence_upd = re.sub(r'(' + pattern + r')', r'start\1stop', sentence_upd)  # \\034[34m # \\034[0m
