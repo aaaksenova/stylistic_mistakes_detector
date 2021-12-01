@@ -36,4 +36,4 @@ if submit_button:
     st.markdown('\n')
     st.markdown(output, unsafe_allow_html=True)
     if flag_punct:
-        st.markdown('Я убрал точку в конце')
+        st.markdown('*Я убрал точку в конце*')
