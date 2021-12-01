@@ -36,11 +36,11 @@ def complexity_analytics(text):
     sent_lens = max([len(sent.split()) for sent in text.split('. ')])
     warn_text = []
     if delta > 1:
-        warn_text.append('Текст перегружен.')
+        warn_text.append('*Текст перегружен.*')
     else:
-        warn_text.append('Все метрики соблюдены')
+        warn_text.append('*Все метрики соблюдены.*')
     if sent_lens > 15:
-        warn_text.append('Предложения длинее 15 слов лучше разбивать на более короткие.')
+        warn_text.append('*Предложения длинее 15 слов лучше разбивать на более короткие.*')
     # for metric in real_values.keys():
     #     if real_values[metric] > standard_values[metric] + 1:
     #         warnings.append((metric, real_values[metric] - standard_values[metric]))

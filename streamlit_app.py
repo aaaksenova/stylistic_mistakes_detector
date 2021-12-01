@@ -3,7 +3,7 @@ import streamlit as st
 
 st.title('Главред для НРМ')
 st.sidebar.subheader("Это инструмент для выявления стилистических ошибок в тексте")
-st.sidebar.markdown('''<span style="color:green">Таким</span> цветом выделяются канцеляризмы \n''',
+st.sidebar.markdown('''<span style="color:green">Таким</span> цветом выделяются канцеляризмы и вводные слова \n''',
                     unsafe_allow_html=True)
 st.sidebar.markdown('''<span style="color:blue">Таким</span> – пассивные конструкции \n''',
                     unsafe_allow_html=True)
