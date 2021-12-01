@@ -22,7 +22,7 @@ with st.form(key='my_form'):
 if submit_button:
     if text_to_check:
         metrics = detect.complexity_analytics(text_to_check)
-        formatted = detect.format_text(text_to_check)
+        formatted, flag_punct = detect.format_text(text_to_check)
         bad_checked = detect.highlight_bad_words(formatted)
         passive_checked = detect.highlight_passive(bad_checked)
         particips = detect.highlight_part(passive_checked)
@@ -35,3 +35,5 @@ if submit_button:
         output = '*Хм, сначала введите текст*'
     st.markdown('\n')
     st.markdown(output, unsafe_allow_html=True)
+    if flag_punct:
+        st.markdown('Я убрал точку в конце')
