@@ -29,14 +29,18 @@ def complexity_analytics(text):
     rs = ReadabilityStats(text)
     real_values = rs.get_stats()
     real_values['flesch_reading_easy'] = -real_values['flesch_reading_easy']
-    warnings = []
-    for metric in real_values.keys():
-        if real_values[metric] > standard_values[metric] + 1:
-            warnings.append((metric, real_values[metric] - standard_values[metric]))
-    if warnings:
-        warn_text = []
-        for metric, value in warnings:
-            warn_text.append("**" + metric.capitalize() + "** на " + str(round(value)) + " больше нормального значения")
+    # warnings = []
+    delta = (real_values['flesch_kincaid_grade'] + real_values['automated_readability_index']) / 2 - \
+            (standard_values['flesch_kincaid_grade'] + standard_values['automated_readability_index']) / 2
+    if delta > 1:
+        warn_text = ['Текст перегружен. Возможно, стоит сократить предложения.']
+    # for metric in real_values.keys():
+    #     if real_values[metric] > standard_values[metric] + 1:
+    #         warnings.append((metric, real_values[metric] - standard_values[metric]))
+    # if warnings:
+    #     warn_text = []
+    #     for metric, value in warnings:
+    #         warn_text.append("**" + metric.capitalize() + "** на " + str(round(value)) + " больше нормального значения")
     else:
         warn_text = ['Все метрики соблюдены']
     return warn_text
