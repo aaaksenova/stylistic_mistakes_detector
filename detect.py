@@ -163,7 +163,7 @@ def highlight_nouns(text):
         noun_patterns = []
         curr_pattern = []
         for tok_idx in range(len(doc)):
-            if doc[tok_idx].pos_ == 'VERB':
+            if doc[tok_idx].pos_ == 'NOUN':
                 curr_pattern.append(tok_idx)
             else:
                 if len(curr_pattern) >= 3:
