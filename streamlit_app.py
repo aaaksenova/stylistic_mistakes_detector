@@ -9,6 +9,10 @@ st.sidebar.markdown('''<span style="color:blue">Таким</span> – пасси
                     unsafe_allow_html=True)
 st.sidebar.markdown('''<span style="color:purple">Таким</span> – причастия и деепричастия \n''',
                     unsafe_allow_html=True)
+st.sidebar.markdown('''<span style="color:red">Таким</span> – сложные глагольные конструкции \n''',
+                    unsafe_allow_html=True)
+st.sidebar.markdown('''<span style="color:orange">Таким</span> – сложные конструкции существительных \n''',
+                    unsafe_allow_html=True)
 st.sidebar.markdown("**Важно!** Этот интструмент лишь подсказывает возможные ошибки, но не гарантирует их наличие.")
 st.sidebar.markdown("С замечаниями и предложениями писать Анне Аксеновой *tg: aksenysh*")
 
