@@ -59,12 +59,11 @@ def format_text(text):
     text = speller.spelled(text)  # Исправляем орфографию
     you_list = ['Вы', 'Вас', 'Вам', 'Вами'] #'Ваш', 'Вашего','Вашему', 'Вашем', 'Ваше', 'Вашим', 'Ваша', 'Вашей', 'Вашу']
     for i in you_list:  # Меняем Вы на нижний регистр
-        text = re.sub(r'\b{}\b'.format(i), r'\b{}\b'.format(i.lower()), text)
+        text = re.sub(r'\b{}\b'.format(i), r'{}'.format(i.lower()), text)
     text = re.sub(r'Ваш', r'ваш', text)  # Меняем Ваш на нижний регистр
     #text = re.sub(r'вашин', r'Вашин', text)
     # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
-    sents = [sent.capitalize() for sent in text.split('. ')]
-    text = '. '.join(sents)
+    text = '. '.join([sent.capitalize() for sent in text.split('. ')])
     text = text.strip()
     return text
 
