@@ -56,12 +56,13 @@ def format_text(text):
     text = re.sub(' %', '%', text)  # Убираем пробел перед %
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
     text = re.sub(' - это', ' – это', text)  # Выравниваем тире
-    spell_checked = speller.spelled(text)  # Исправляем орфографию
-    you_list = ['Вы', 'Вас', 'Вам', 'Вами']
+    text = speller.spelled(text)  # Исправляем орфографию
+    you_list = ['Вы', 'Вас', 'Вам', 'Вами'] #'Ваш', 'Вашего','Вашему', 'Вашем', 'Ваше', 'Вашим', 'Ваша', 'Вашей', 'Вашу']
     for i in you_list:  # Меняем Вы на нижний регистр
         text = re.sub(r'\b{}\b'.format(i), r'\b{}\b'.format(i.lower()), text)
+    text = re.sub(r'Ваш', r'ваш', text)
     # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
-    return spell_checked
+    return text
 
 
 def highlight_bad_words(text):
