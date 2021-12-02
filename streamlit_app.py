@@ -23,8 +23,8 @@ if submit_button:
     if text_to_check:
         metrics = detect.complexity_analytics(text_to_check)
         formatted, flag_punct = detect.format_text(text_to_check)
-        bad_checked = detect.highlight_bad_words(formatted)
-        passive_checked = detect.highlight_passive(bad_checked)
+        passive_checked = detect.highlight_passive(formatted)
+        bad_checked = detect.highlight_bad_words(passive_checked)
         particips = detect.highlight_part(passive_checked)
         verbs = detect.highlight_verbs(particips)
         output = detect.highlight_nouns(verbs)

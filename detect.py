@@ -122,7 +122,7 @@ def highlight_passive(text):
     text_upd = []
     # checking each sentence for its type
     for sentence in sentences:
-        patterns = checkForSentType(str(sentence))
+        patterns = checkForSentType(str(re.sub(r'<.+?>', r'', sentence)))
         sentence_upd = sentence
         if patterns:
             for pattern in patterns:
