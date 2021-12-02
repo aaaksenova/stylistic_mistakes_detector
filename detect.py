@@ -53,6 +53,7 @@ def complexity_analytics(text):
 
 
 def format_text(text):
+    abbrs = list(set(re.findall(r'[А-Я]+\b', text)))  # Собираем аббревиатуры для замен
     text = re.sub(' %', '%', text)  # Убираем пробел перед %
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
     text = re.sub(' - это', ' – это', text)  # Выравниваем тире
@@ -65,6 +66,9 @@ def format_text(text):
     # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
     text = '. '.join([sent.capitalize() for sent in text.split('. ')])
     text_new = text.strip('.')
+    if abbrs:
+        for abbr in abbrs:
+            text_new = re.sub(r'\b{}\b'.format(abbr.lower()), '{}'.format(abbr), text_new)
     flag_punct = 0
     if text_new != text:
         flag_punct = 1
@@ -213,7 +217,7 @@ def highlight_part(text):
 
 def get_abbrs(text):
     abbrs = re.findall(r'[А-Я]+\b', text)
-    abbr_list = ['НДФЛ', 'ГИБДД', 'ИНН', 'СМС', 'ПИН']
+    abbr_list = ['НДФЛ', 'ГИБДД', 'ИНН', 'СМС', 'ПИН', 'ЖКХ']
     if abbrs:
         abbrs = [abbr for abbr in abbrs if abbr not in abbr_list]
     return list(set(abbrs))
