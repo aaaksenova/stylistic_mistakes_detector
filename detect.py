@@ -61,6 +61,7 @@ def format_text(text):
     if abbrs:
         for abbr in abbrs:
             text = re.sub(r'\b{}\b'.format(abbr.lower()), '{}'.format(abbr), text)
+            text = re.sub(r'\b{}\b'.format(abbr.lower().capitalize()), '{}'.format(abbr), text)
     you_list = ['Вы', 'Вас', 'Вам', 'Вами'] # 'Ваш', 'Вашего','Вашему', 'Вашем', 'Ваше', 'Вашим', 'Ваша', 'Вашей', 'Вашу']
     for i in you_list:  # Меняем Вы на нижний регистр
         text = re.sub(r'\b{}\b'.format(i), r'{}'.format(i.lower()), text)
