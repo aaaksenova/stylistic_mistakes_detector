@@ -4,13 +4,10 @@ import re
 import spacy
 from pyaspeller import YandexSpeller
 
-# from extractor import NumberExtractor
 
 speller = YandexSpeller()
-# extractor = NumberExtractor()
 model = spacy.load('ru_core_news_md')
-
-# Словарь сложных слов:
+# Словарь ненужных слов:
 stop_words = """эквайринг, полученный, абсолютно, действительно, гарантированно, очень, необходимый, необходимо, \
 самый, наиболее, являться, проинформировать, осуществляться, производить, осуществлять, производиться, надлежащий, данный, соответствующий, \
 максимально, совершение, совершить, произвести, надлежащий, данное, списание, оказание, реальный"""
@@ -21,6 +18,13 @@ stop_words = {word: ' '.join([w.lemma_ for w in model(word)]) for word in stop_w
 
 
 def complexity_analytics(text):
+    """
+    The function calculates readability metrics for given text
+    and aggregates flesch_kincaid_grade and automated_readability_index
+    comparing their mean to 10
+    :param text: str
+    :return: list
+    """
     standard_values = {'flesch_kincaid_grade': 10,
                        'flesch_reading_easy': 47.30264705882351,
                        'coleman_liau_index': 9.27248529411765,
@@ -29,8 +33,8 @@ def complexity_analytics(text):
                        'lix': 10}
     rs = ReadabilityStats(text)
     real_values = rs.get_stats()
+
     real_values['flesch_reading_easy'] = -real_values['flesch_reading_easy']
-    # warnings = []
     delta = (real_values['flesch_kincaid_grade'] + real_values['automated_readability_index']) / 2 - \
             (standard_values['flesch_kincaid_grade'] + standard_values['automated_readability_index']) / 2
     sent_lens = max([len(sent.split()) for sent in text.split('. ')])
@@ -41,29 +45,29 @@ def complexity_analytics(text):
         warn_text.append('*Все метрики соблюдены.*')
     if sent_lens > 15:
         warn_text.append('*Предложения длинее 15 слов лучше разбивать на более короткие.*')
-    # for metric in real_values.keys():
-    #     if real_values[metric] > standard_values[metric] + 1:
-    #         warnings.append((metric, real_values[metric] - standard_values[metric]))
-    # if warnings:
-    #     warn_text = []
-    #     for metric, value in warnings:
-    #         warn_text.append("**" + metric.capitalize() + "** на " + str(round(value)) + " больше нормального значения")
-
     return warn_text
 
 
 def format_text(text):
+    """
+    The function is responsible for text formatting
+    it works with:
+    - whitespaces before %
+    - dashes between words
+    - lower and upper case
+    - dot in the end of the text
+    :param text: str
+    :return: str, bool
+    """
     abbrs = list(set(re.findall(r'[А-Я]+\b', text)))  # Собираем аббревиатуры для замен
     text = re.sub(' %', '%', text)  # Убираем пробел перед %
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
     text = re.sub(' - это', ' – это', text)  # Выравниваем тире
     text = speller.spelled(text)  # Исправляем орфографию
-    you_list = ['Вы', 'Вас', 'Вам', 'Вами'] # 'Ваш', 'Вашего','Вашему', 'Вашем', 'Ваше', 'Вашим', 'Ваша', 'Вашей', 'Вашу']
+    you_list = ['Вы', 'Вас', 'Вам', 'Вами']
     for i in you_list:  # Меняем Вы на нижний регистр
         text = re.sub(r'\b{}\b'.format(i), r'{}'.format(i.lower()), text)
     text = re.sub(r'Ваш', r'ваш', text)  # Меняем Ваш на нижний регистр
-    #text = re.sub(r'вашин', r'Вашин', text)
-    # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
     text = '. '.join([sent.capitalize() for sent in text.split('. ')])
     text_new = text.strip('.')
     flag_punct = 0
@@ -77,6 +81,12 @@ def format_text(text):
 
 
 def highlight_bad_words(text):
+    """
+    The function highlights words stylistically inappropriate
+    for the given text based on word dictionary
+    :param text: str
+    :return: str
+    """
     sents = text.split('.')
     detected = []
     for sent in sents:
@@ -92,21 +102,25 @@ def highlight_bad_words(text):
     return text
 
 
-# function to check the type of sentence
 def checkForSentType(inputSentence):
+    """
+    The function detects passive constuction subjects in the given text
+    and creates patterns with the closest verb
+    :param inputSentence: str
+    :return: list
+    """
+
     # running the model on sentence
     getDocFile = model(inputSentence.strip())
 
     # getting the syntactic dependency
     getPassTags = [token.text
-                   for token in getDocFile if token.dep_ == 'nsubj:pass'
-                   ]
+                   for token in getDocFile if token.dep_ == 'nsubj:pass']
     if getPassTags:
         getPassIdx = [idx
                       for idx, token in enumerate(getDocFile) if token.dep_ == 'nsubj:pass']
         getVerbIdx = [idx
                       for idx, token in enumerate(getDocFile) if token.pos_ == 'VERB']
-
         patterns = []
         for i in getPassIdx:
             deltas = abs(np.array(getVerbIdx) - i)
@@ -123,6 +137,11 @@ def checkForSentType(inputSentence):
 
 
 def highlight_passive(text):
+    """
+    The function highlights passive patterns found by checkForSentType()
+    :param text: str
+    :return: str
+    """
     sentences = text.split('. ')
     text_upd = []
     # checking each sentence for its type
@@ -139,8 +158,13 @@ def highlight_passive(text):
 
 
 def highlight_verbs(text):
+    """
+    The function detects and highlights constructions
+    with 3 and more verbs in a row
+    :param text: str
+    :return: str
+    """
     sentences = text.split('. ')
-
     text_upd = []
     for sentence in sentences:
         sentence_upd = sentence
@@ -166,8 +190,14 @@ def highlight_verbs(text):
 
 
 def highlight_nouns(text):
+    """
+    The function detects and highlights constructions
+    with 3 and more nouns in a row
+    and conditioning nominal constructions like 'при зачислении'
+    :param text: str
+    :return: str
+    """
     sentences = text.split('. ')
-
     text_upd = []
     for sentence in sentences:
         sentence_upd = sentence
@@ -195,8 +225,12 @@ def highlight_nouns(text):
 
 
 def highlight_part(text):
+    """
+    The function detects and highlights participles and converbs
+    :param text: str
+    :return: str
+    """
     sentences = text.split('. ')
-
     particip_patterns = []
     text_upd = []
     for sentence in sentences:
@@ -217,8 +251,13 @@ def highlight_part(text):
 
 
 def get_abbrs(text):
+    """
+    The function extracts abbreviations unknown for customers
+    :param text: str
+    :return: list
+    """
     abbrs = re.findall(r'[А-Я]+\b', text)
     abbr_list = ['НДФЛ', 'ГИБДД', 'ИНН', 'СМС', 'ПИН', 'ЖКХ', 'НПФ']
     if abbrs:
-        abbrs = [abbr for abbr in abbrs if abbr not in abbr_list]
-    return list(set(abbrs))
+        abbrs = list(set([abbr for abbr in abbrs if abbr not in abbr_list]))
+    return abbrs
