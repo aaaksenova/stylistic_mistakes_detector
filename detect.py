@@ -211,7 +211,7 @@ def highlight_part(text):
     return text
 
 
-def det_abbrs(text):
+def get_abbrs(text):
     abbrs = re.findall(r'[А-Я]+\b', text)
     abbr_list = ['НДФЛ', 'ГИБДД', 'ИНН', 'СМС', 'ПИН']
     if abbrs:
