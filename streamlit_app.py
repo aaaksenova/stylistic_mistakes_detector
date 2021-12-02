@@ -25,7 +25,7 @@ if submit_button:
         formatted, flag_punct = detect.format_text(text_to_check)
         passive_checked = detect.highlight_passive(formatted)
         bad_checked = detect.highlight_bad_words(passive_checked)
-        particips = detect.highlight_part(passive_checked)
+        particips = detect.highlight_part(bad_checked)
         verbs = detect.highlight_verbs(particips)
         output = detect.highlight_nouns(verbs)
         st.write("""*Спасибо за ожидание! Вот, что получилось:*""")
