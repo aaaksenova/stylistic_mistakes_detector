@@ -112,7 +112,7 @@ def checkForSentType(inputSentence):
             elif getVerbIdx[min_idx] < i:
                 pattern = pass_verb + '.+' + getDocFile[i].text
             patterns.append(pattern)
-            return patterns
+        return patterns
     else:
         return ''
 
