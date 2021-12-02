@@ -31,9 +31,15 @@ if submit_button:
         st.write("""*Спасибо за ожидание! Вот, что получилось:*""")
         for metric in metrics:
             st.markdown(metric)
+        abbrs = detect.get_abbrs(text_to_check)
     else:
         output = '*Хм, сначала введите текст*'
     st.markdown('\n')
     st.markdown(output, unsafe_allow_html=True)
     if flag_punct:
         st.markdown('*Я убрал точку в конце*')
+    if abbrs:
+        if len(abbrs) > 1:
+            st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(abbrs))
+        else:
+            st.markdown('*Расшифруйте аббревиатуру: *' + abbrs[0])

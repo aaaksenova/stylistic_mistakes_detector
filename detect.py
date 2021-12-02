@@ -209,3 +209,11 @@ def highlight_part(text):
     text = '. '.join(text_upd)
     text = text.replace('start', '''<span style="color:Purple;">''').replace('stop', '</span>')
     return text
+
+
+def det_abbrs(text):
+    abbrs = re.findall(r'[А-Я]+\b', text)
+    abbr_list = ['НДФЛ', 'ГИБДД', 'ИНН', 'СМС', 'ПИН']
+    if abbrs:
+        abbrs = [abbr for abbr in abbrs if abbr not in abbr_list]
+    return list(set(abbrs))
