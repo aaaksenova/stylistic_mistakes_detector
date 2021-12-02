@@ -58,6 +58,9 @@ def format_text(text):
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
     text = re.sub(' - это', ' – это', text)  # Выравниваем тире
     text = speller.spelled(text)  # Исправляем орфографию
+    if abbrs:
+        for abbr in abbrs:
+            text = re.sub(r'\b{}\b'.format(abbr.lower()), '{}'.format(abbr), text)
     you_list = ['Вы', 'Вас', 'Вам', 'Вами'] # 'Ваш', 'Вашего','Вашему', 'Вашем', 'Ваше', 'Вашим', 'Ваша', 'Вашей', 'Вашу']
     for i in you_list:  # Меняем Вы на нижний регистр
         text = re.sub(r'\b{}\b'.format(i), r'{}'.format(i.lower()), text)
@@ -66,9 +69,6 @@ def format_text(text):
     # final = extractor.replace_groups(spell_checked)  # Меняем числа словами на цифры
     text = '. '.join([sent.capitalize() for sent in text.split('. ')])
     text_new = text.strip('.')
-    if abbrs:
-        for abbr in abbrs:
-            text_new = re.sub(r'\b{}\b'.format(abbr.lower()), '{}'.format(abbr), text_new)
     flag_punct = 0
     if text_new != text:
         flag_punct = 1
