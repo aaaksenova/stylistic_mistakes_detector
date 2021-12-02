@@ -71,7 +71,7 @@ def format_text(text):
         flag_punct = 1
     if abbrs:
         for abbr in abbrs:
-            text_new = re.sub(r'\b{}\b'.format(abbr.lower()), '{}'.format(abbr), text_new)
+            text_new = re.sub(r'{}\b'.format(abbr.lower()), '{}'.format(abbr), text_new)
             text_new = re.sub(r'\b{}\b'.format(abbr.lower().capitalize()), '{}'.format(abbr), text_new)
     return text_new, flag_punct
 
