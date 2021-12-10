@@ -256,7 +256,7 @@ def get_abbrs(text):
     :param text: str
     :return: list
     """
-    abbrs = re.findall(r'[А-Я]+\b', text)
+    abbrs = re.findall(r'[А-Я][А-Я]+\b', text)
     abbr_list = ['НДФЛ', 'ГИБДД', 'ИНН', 'СМС', 'ПИН', 'ЖКХ', 'НПФ']
     if abbrs:
         abbrs = list(set([abbr for abbr in abbrs if abbr not in abbr_list]))
