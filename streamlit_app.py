@@ -28,7 +28,6 @@ if submit_button:
         particips = detect.highlight_part(bad_checked)
         verbs = detect.highlight_verbs(particips)
         output = detect.highlight_nouns(verbs)
-        st.write("""*Спасибо за ожидание! Вот, что получилось:*""")
         for metric in metrics:
             st.markdown(metric)
         abbrs = detect.get_abbrs(text_to_check)
