@@ -65,11 +65,11 @@ def format_text(text):
     :param text: str
     :return: str, bool
     """
-    abbrs = list(set(re.findall(r'[А-Я]+\b', text)))  # Собираем аббревиатуры для замен
+    # abbrs = list(set(re.findall(r'[А-Я][А-Я]+\b', text)))  # Собираем аббревиатуры для замен
     text = re.sub(' %', '%', text)  # Убираем пробел перед %
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
     text = re.sub(' - это', ' – это', text)  # Выравниваем тире
-    # text = speller.spelled(text)  # Исправляем орфографию
+    text = speller.spelled(text)  # Исправляем орфографию
     you_list = ['Вы', 'Вас', 'Вам', 'Вами']
     for i in you_list:  # Меняем Вы на нижний регистр
         text = re.sub(r'\b{}\b'.format(i), r'{}'.format(i.lower()), text)
@@ -79,10 +79,10 @@ def format_text(text):
     flag_punct = 0
     if text_new != text:
         flag_punct = 1
-    if abbrs:
-        for abbr in abbrs:
-            text_new = re.sub(r'{}\b'.format(abbr.lower()), '{}'.format(abbr), text_new)
-            text_new = re.sub(r'\b{}\b'.format(abbr.lower().capitalize()), '{}'.format(abbr), text_new)
+    # if abbrs:
+    #     for abbr in abbrs:
+    #         text_new = re.sub(r'{}\b'.format(abbr.lower()), '{}'.format(abbr), text_new)
+    #         text_new = re.sub(r'\b{}\b'.format(abbr.lower().capitalize()), '{}'.format(abbr), text_new)
     return text_new, flag_punct
 
 
