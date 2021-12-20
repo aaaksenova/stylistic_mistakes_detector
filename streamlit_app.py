@@ -17,7 +17,7 @@ st.sidebar.markdown("**Важно!** Этот инструмент лишь по
 st.sidebar.markdown("С замечаниями и предложениями писать Анне Аксеновой *tg: aksenysh*")
 
 with st.form(key='my_form'):
-    text_to_check = st.text_input(label='Введите текст')
+    text_to_check = st.text_area(label='Введите текст')
     submit_button = st.form_submit_button(label="Обработать")
 if submit_button:
     if text_to_check:
