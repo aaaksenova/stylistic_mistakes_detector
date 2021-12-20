@@ -72,9 +72,8 @@ def format_text(text):
     text = speller.spelled(text)  # Исправляем орфографию
     you_list = ['Вы', 'Вас', 'Вам', 'Вами']
     for i in you_list:  # Меняем Вы на нижний регистр
-        text = re.sub(r'\b{}\b'.format(i), r'{}'.format(i.lower()), text)
+        text = re.sub(r'([^\.!\?] )\b{}\b'.format(i), r'\1{}'.format(i.lower()), text)
     text = re.sub(r'Ваш', r'ваш', text)  # Меняем Ваш на нижний регистр
-    text = '. '.join([sent.capitalize() for sent in text.split('. ')])
     text_new = text.strip('.')
     flag_punct = 0
     if text_new != text:
