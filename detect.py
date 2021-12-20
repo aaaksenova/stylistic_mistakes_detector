@@ -68,7 +68,7 @@ def format_text(text):
     # abbrs = list(set(re.findall(r'[А-Я][А-Я]+\b', text)))  # Собираем аббревиатуры для замен
     text = re.sub(' %', '%', text)  # Убираем пробел перед %
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
-    text = re.sub(' - это', ' – это', text)  # Выравниваем тире
+    text = re.sub('\b - \b', '\b – \b', text)  # Выравниваем тире
     text = speller.spelled(text)  # Исправляем орфографию
     you_list = ['Вы', 'Вас', 'Вам', 'Вами']
     for i in you_list:  # Меняем Вы на нижний регистр
