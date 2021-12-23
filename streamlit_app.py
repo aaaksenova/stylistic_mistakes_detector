@@ -48,17 +48,18 @@ if st.session_state['submit_button']:
     st.markdown('\n')
     st.markdown(st.session_state['output'], unsafe_allow_html=True)
     if st.session_state['metrics']:
-        for metric in st.session_state['metrics']:
-            st.markdown(metric)
-        if st.session_state['flag_punct']:
-            st.markdown('*Я убрал точку в конце*')
-        if st.session_state['bad_abbrs']:
-            if len(st.session_state['bad_abbrs']) > 1:
-                st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(st.session_state['bad_abbrs']))
-            else:
-                st.markdown('*Расшифруйте аббревиатуру: *' + st.session_state['bad_abbrs'][0])
-        if st.session_state['replce_abbrs']:
-            st.markdown('*Замените: *')
-            for abbr in st.session_state['replce_abbrs'].keys():
-                st.markdown(abbr + ' на ' + st.session_state['replce_abbrs'][abbr])
-    st.session_state.clear()
+        with st.expander('Открыть комментарии'):
+            for metric in st.session_state['metrics']:
+                st.markdown(metric)
+            if st.session_state['flag_punct']:
+                st.markdown('*Я убрал точку в конце*')
+            if st.session_state['bad_abbrs']:
+                if len(st.session_state['bad_abbrs']) > 1:
+                    st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(st.session_state['bad_abbrs']))
+                else:
+                    st.markdown('*Расшифруйте аббревиатуру: *' + st.session_state['bad_abbrs'][0])
+            if st.session_state['replce_abbrs']:
+                st.markdown('*Замените: *')
+                for abbr in st.session_state['replce_abbrs'].keys():
+                    st.markdown(abbr + ' на ' + st.session_state['replce_abbrs'][abbr])
+        st.session_state.clear()
