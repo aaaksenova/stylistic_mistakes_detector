@@ -24,7 +24,7 @@ def read_abbr_file():
     return df_abbrs
 
 
-df_abbrs = detect.read_abbr_file()
+df_abbrs = read_abbr_file()
 
 
 with st.form(key='my_form'):
