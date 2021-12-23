@@ -36,8 +36,7 @@ if submit_button:
         output = '*Хм, сначала введите текст*'
     else:
         st.session_state['metrics'] = detect.complexity_analytics(text_to_check)
-        st.session_state['bad_abbrs'], st.session_state['replce_abbrs'], text_to_check \
-            = detect.get_abbrs(text_to_check, df_abbrs)
+        st.session_state['bad_abbrs'], st.session_state['replce_abbrs'], text_to_check = detect.get_abbrs(text_to_check, df_abbrs)
         formatted, st.session_state['flag_punct'] = detect.format_text(text_to_check)
         passive_checked = detect.highlight_passive(formatted)
         bad_checked = detect.highlight_bad_words(passive_checked)
