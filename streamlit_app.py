@@ -1,7 +1,7 @@
 import detect
 import streamlit as st
 import pandas as pd
-from streamlit_toggle import st_toggleswitch
+# from streamlit_toggle import st_toggleswitch
 
 st.title('Главред для НРМ')
 st.sidebar.subheader("Это инструмент для выявления стилистических ошибок в тексте")
@@ -46,7 +46,7 @@ if submit_button:
     st.markdown('\n')
     st.markdown(output, unsafe_allow_html=True)
     if metrics:
-        comments_enabled = st_toggleswitch("Вывести комментарии")
+        comments_enabled = 1 #st_toggleswitch("Вывести комментарии")
         if comments_enabled:
             for metric in metrics:
                 st.markdown(metric)
