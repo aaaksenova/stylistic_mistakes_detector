@@ -269,7 +269,7 @@ def get_abbrs(text, df_abbrs):
         abbrs = list(set(abbrs))
         for abbr in abbrs:
             a_class = df_abbrs[df_abbrs['abbreviation'] == abbr]
-            if a_class.abbr_class.values[0]:
+            if a_class.abbr_class.values.size > 0:
                 a_class = a_class.abbr_class.values[0]
                 if a_class == 1:
                     bad_abbrs.append(abbr)
