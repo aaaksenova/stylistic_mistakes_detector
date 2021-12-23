@@ -280,4 +280,6 @@ def get_abbrs(text, df_abbrs):
             else:
                 bad_abbrs.append(abbr)
         return bad_abbrs, replce_abbrs, text
+    else:
+        return '', '', text
 
