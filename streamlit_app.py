@@ -1,7 +1,7 @@
 import detect
 import streamlit as st
 import pandas as pd
-import st_toggleswitch
+from streamlit_toggle import st_toggleswitch
 
 st.title('Главред для НРМ')
 st.sidebar.subheader("Это инструмент для выявления стилистических ошибок в тексте")
