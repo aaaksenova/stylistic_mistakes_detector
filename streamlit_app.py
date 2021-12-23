@@ -33,7 +33,7 @@ with st.form(key='my_form'):
 if submit_button:
     if text_to_check:
         metrics = detect.complexity_analytics(text_to_check)
-        bad_abbrs, replce_abbrs, text_to_check = detect.get_abbrs(text_to_check)
+        bad_abbrs, replce_abbrs, text_to_check = detect.get_abbrs(text_to_check, df_abbrs)
         formatted, flag_punct = detect.format_text(text_to_check)
         passive_checked = detect.highlight_passive(formatted)
         bad_checked = detect.highlight_bad_words(passive_checked)
