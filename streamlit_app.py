@@ -1,6 +1,7 @@
 import detect
 import streamlit as st
 import pandas as pd
+import st_toggleswitch
 
 st.title('Главред для НРМ')
 st.sidebar.subheader("Это инструмент для выявления стилистических ошибок в тексте")
@@ -31,7 +32,9 @@ with st.form(key='my_form'):
     text_to_check = st.text_area(label='Введите текст')
     submit_button = st.form_submit_button(label="Обработать")
 if submit_button:
-    if text_to_check:
+    if not text_to_check:
+        output = '*Хм, сначала введите текст*'
+    else:
         metrics = detect.complexity_analytics(text_to_check)
         bad_abbrs, replce_abbrs, text_to_check = detect.get_abbrs(text_to_check, df_abbrs)
         formatted, flag_punct = detect.format_text(text_to_check)
@@ -40,20 +43,21 @@ if submit_button:
         particips = detect.highlight_part(bad_checked)
         verbs = detect.highlight_verbs(particips)
         output = detect.highlight_nouns(verbs)
-        for metric in metrics:
-            st.markdown(metric)
-    else:
-        output = '*Хм, сначала введите текст*'
     st.markdown('\n')
     st.markdown(output, unsafe_allow_html=True)
-    if flag_punct:
-        st.markdown('*Я убрал точку в конце*')
-    if bad_abbrs:
-        if len(bad_abbrs) > 1:
-            st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(bad_abbrs))
-        else:
-            st.markdown('*Расшифруйте аббревиатуру: *' + bad_abbrs[0])
-    if replce_abbrs:
-        st.markdown('*Замените: *')
-        for abbr in replce_abbrs.keys():
-            st.markdown(abbr + ' на ' + replce_abbrs[abbr])
+    if metrics:
+        comments_enabled = st_toggleswitch("Вывести комментарии")
+        if comments_enabled:
+            for metric in metrics:
+                st.markdown(metric)
+            if flag_punct:
+                st.markdown('*Я убрал точку в конце*')
+            if bad_abbrs:
+                if len(bad_abbrs) > 1:
+                    st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(bad_abbrs))
+                else:
+                    st.markdown('*Расшифруйте аббревиатуру: *' + bad_abbrs[0])
+            if replce_abbrs:
+                st.markdown('*Замените: *')
+                for abbr in replce_abbrs.keys():
+                    st.markdown(abbr + ' на ' + replce_abbrs[abbr])
