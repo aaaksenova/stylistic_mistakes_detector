@@ -3,6 +3,7 @@ import numpy as np
 import re
 import spacy
 from pyaspeller import YandexSpeller
+import pandas as pd
 
 
 speller = YandexSpeller()
@@ -255,14 +256,36 @@ def highlight_part(text):
     return text
 
 
-def get_abbrs(text):
+def get_abbrs(text, df_abbrs):
     """
     The function extracts abbreviations unknown for customers
     :param text: str
     :return: list
     """
-    abbrs = re.findall(r'[А-Я][А-Я]+\b', text)
-    abbr_list = ['НДФЛ', 'ГИБДД', 'ИНН', 'СМС', 'ПИН', 'ЖКХ', 'НПФ']
+    abbrs = re.findall(r'\b[А-Я][А-Я]+\b', text)
     if abbrs:
-        abbrs = list(set([abbr for abbr in abbrs if abbr not in abbr_list]))
+        bad_abbrs = []
+        replce_abbrs = {}
+        abbrs = list(set(abbrs))
+        for abbr in abbrs:
+            a_class = df_abbrs[df_abbrs['abbreviation'] == abbr]
+            if a_class:
+                a_class = a_class.abbr_class
+                if a_class == '1':
+                    bad_abbrs.append(abbr)
+                elif a_class == 'замена':
+                    replce_abbrs[abbr] = df_abbrs[df_abbrs['abbreviation'] == abbr].replace
+                elif a_class == 'капс':
+                    text = re.sub(r'\b{}\b'.format(abbr), abbr.lower(), text)
+            else:
+                bad_abbrs.append(abbr)
+        return bad_abbrs, replce_abbrs, text
+
+
+
     return abbrs
+
+
+def read_abbr_file():
+    df_abbrs = pd.read_excel('abbreviations.xlsx')
+    return df_abbrs

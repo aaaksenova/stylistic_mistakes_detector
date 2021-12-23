@@ -16,12 +16,18 @@ st.sidebar.markdown('''<span style="color:orange">Таким</span> – сло�
 st.sidebar.markdown("**Важно!** Этот инструмент лишь подсказывает возможные ошибки, но не гарантирует их наличие.")
 st.sidebar.markdown("С замечаниями и предложениями писать Анне Аксеновой *tg: aksenysh*")
 
+
+@st.cache
+df_abbrs = detect.read_abbr_file()
+
+
 with st.form(key='my_form'):
     text_to_check = st.text_area(label='Введите текст')
     submit_button = st.form_submit_button(label="Обработать")
 if submit_button:
     if text_to_check:
         metrics = detect.complexity_analytics(text_to_check)
+        bad_abbrs, replce_abbrs, text_to_check = detect.get_abbrs(text_to_check)
         formatted, flag_punct = detect.format_text(text_to_check)
         passive_checked = detect.highlight_passive(formatted)
         bad_checked = detect.highlight_bad_words(passive_checked)
@@ -30,15 +36,18 @@ if submit_button:
         output = detect.highlight_nouns(verbs)
         for metric in metrics:
             st.markdown(metric)
-        abbrs = detect.get_abbrs(text_to_check)
     else:
         output = '*Хм, сначала введите текст*'
     st.markdown('\n')
     st.markdown(output, unsafe_allow_html=True)
     if flag_punct:
         st.markdown('*Я убрал точку в конце*')
-    if abbrs:
-        if len(abbrs) > 1:
-            st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(abbrs))
+    if bad_abbrs:
+        if len(bad_abbrs) > 1:
+            st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(bad_abbrs))
         else:
-            st.markdown('*Расшифруйте аббревиатуру: *' + abbrs[0])
+            st.markdown('*Расшифруйте аббревиатуру: *' + bad_abbrs[0])
+    if replce_abbrs:
+        st.markdown('*Замените: *')
+        for abbr in replce_abbrs.keys():
+            st.markdown(abbr + ' на ' + replce_abbrs[abbr])
