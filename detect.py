@@ -281,11 +281,3 @@ def get_abbrs(text, df_abbrs):
                 bad_abbrs.append(abbr)
         return bad_abbrs, replce_abbrs, text
 
-
-
-    return abbrs
-
-
-def read_abbr_file():
-    df_abbrs = pd.read_excel('abbreviations.xlsx')
-    return df_abbrs

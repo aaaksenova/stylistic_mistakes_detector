@@ -1,5 +1,6 @@
 import detect
 import streamlit as st
+import pandas as pd
 
 st.title('Главред для НРМ')
 st.sidebar.subheader("Это инструмент для выявления стилистических ошибок в тексте")
@@ -17,7 +18,12 @@ st.sidebar.markdown("**Важно!** Этот инструмент лишь по
 st.sidebar.markdown("С замечаниями и предложениями писать Анне Аксеновой *tg: aksenysh*")
 
 
-@st.cache
+@st.cache(suppress_st_warning=True)
+def read_abbr_file():
+    df_abbrs = pd.read_excel('abbreviations.xlsx')
+    return df_abbrs
+
+
 df_abbrs = detect.read_abbr_file()
 
 
