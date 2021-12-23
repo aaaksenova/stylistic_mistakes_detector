@@ -30,10 +30,10 @@ df_abbrs = read_abbr_file()
 
 with st.form(key='my_form'):
     text_to_check = st.text_area(label='Введите текст')
-    submit_button = st.form_submit_button(label="Обработать")
-if submit_button:
+    st.session_state['submit_button'] = st.form_submit_button(label="Обработать")
+if st.session_state['submit_button']:
     if not text_to_check:
-        output = '*Хм, сначала введите текст*'
+        st.session_state['output'] = '*Хм, сначала введите текст*'
     else:
         st.session_state['metrics'] = detect.complexity_analytics(text_to_check)
         bad_abbrs, replace_abbrs, text_to_check = detect.get_abbrs(text_to_check, df_abbrs)
