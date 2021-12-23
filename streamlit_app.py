@@ -35,29 +35,31 @@ if submit_button:
     if not text_to_check:
         output = '*Хм, сначала введите текст*'
     else:
-        metrics = detect.complexity_analytics(text_to_check)
-        bad_abbrs, replce_abbrs, text_to_check = detect.get_abbrs(text_to_check, df_abbrs)
-        formatted, flag_punct = detect.format_text(text_to_check)
+        st.session_state['metrics'] = detect.complexity_analytics(text_to_check)
+        st.session_state['bad_abbrs'], st.session_state['replce_abbrs'], text_to_check \
+            = detect.get_abbrs(text_to_check, df_abbrs)
+        formatted, st.session_state['flag_punct'] = detect.format_text(text_to_check)
         passive_checked = detect.highlight_passive(formatted)
         bad_checked = detect.highlight_bad_words(passive_checked)
         particips = detect.highlight_part(bad_checked)
         verbs = detect.highlight_verbs(particips)
-        output = detect.highlight_nouns(verbs)
+        st.session_state['output'] = detect.highlight_nouns(verbs)
     st.markdown('\n')
-    st.markdown(output, unsafe_allow_html=True)
-    if metrics:
-        comments_enabled = 1 #st_toggleswitch("Вывести комментарии")
+    st.markdown(st.session_state['output'], unsafe_allow_html=True)
+    if st.session_state['metrics']:
+        comments_enabled = st.button("Вывести комментарии")
         if comments_enabled:
-            for metric in metrics:
+            for metric in st.session_state['metrics']:
                 st.markdown(metric)
-            if flag_punct:
+            if st.session_state['flag_punct']:
                 st.markdown('*Я убрал точку в конце*')
-            if bad_abbrs:
-                if len(bad_abbrs) > 1:
-                    st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(bad_abbrs))
+            if st.session_state['bad_abbrs']:
+                if len(st.session_state['bad_abbrs']) > 1:
+                    st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(st.session_state['bad_abbrs']))
                 else:
-                    st.markdown('*Расшифруйте аббревиатуру: *' + bad_abbrs[0])
-            if replce_abbrs:
+                    st.markdown('*Расшифруйте аббревиатуру: *' + st.session_state['bad_abbrs'][0])
+            if st.session_state['replce_abbrs']:
                 st.markdown('*Замените: *')
-                for abbr in replce_abbrs.keys():
-                    st.markdown(abbr + ' на ' + replce_abbrs[abbr])
+                for abbr in st.session_state['replce_abbrs'].keys():
+                    st.markdown(abbr + ' на ' + st.session_state['replce_abbrs'][abbr])
+    st.session_state.clear()
