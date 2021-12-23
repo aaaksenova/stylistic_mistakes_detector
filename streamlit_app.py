@@ -48,8 +48,8 @@ if st.session_state['submit_button']:
     st.markdown('\n')
     st.markdown(st.session_state['output'], unsafe_allow_html=True)
     if st.session_state['metrics']:
-        comments_enabled = st.button("Вывести комментарии")
-        if comments_enabled:
+        st.session_state['comments_enabled'] = st.button("Вывести комментарии")
+        if st.session_state['comments_enabled']:
             for metric in st.session_state['metrics']:
                 st.markdown(metric)
             if st.session_state['flag_punct']:
