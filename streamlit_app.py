@@ -30,8 +30,8 @@ df_abbrs = read_abbr_file()
 
 with st.form(key='my_form'):
     text_to_check = st.text_area(label='Введите текст')
-    st.session_state['submit_button'] = st.form_submit_button(label="Обработать")
-if st.session_state['submit_button']:
+    run_processing = st.form_submit_button(label="Обработать")
+if run_processing:
     if not text_to_check:
         st.session_state['output'] = '*Хм, сначала введите текст*'
     else:
