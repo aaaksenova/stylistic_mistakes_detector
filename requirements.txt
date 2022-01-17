@@ -36,7 +36,6 @@ gitdb==4.0.9
 GitPython==3.1.24
 graphviz==0.18
 greenlet==1.1.2
-huggingface-hub==0.4.0
 idna==3.3
 importlib-metadata==4.10.0
 intervaltree==3.1.0
@@ -155,7 +154,7 @@ traitlets==5.1.1
 transformers==4.15.0
 transliterate==1.10.2
 typer==0.3.2
-typing_extensions==4.0.1
+typing_extensions
 tzdata==2021.5
 tzlocal==4.0.2
 umap==0.1.1
