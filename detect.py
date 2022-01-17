@@ -3,7 +3,6 @@ import numpy as np
 import re
 import spacy
 from pyaspeller import YandexSpeller
-import pandas as pd
 
 
 speller = YandexSpeller()
@@ -79,10 +78,6 @@ def format_text(text):
     flag_punct = 0
     if text_new != text:
         flag_punct = 1
-    # if abbrs:
-    #     for abbr in abbrs:
-    #         text_new = re.sub(r'{}\b'.format(abbr.lower()), '{}'.format(abbr), text_new)
-    #         text_new = re.sub(r'\b{}\b'.format(abbr.lower().capitalize()), '{}'.format(abbr), text_new)
     return text_new, flag_punct
 
 
@@ -259,7 +254,7 @@ def highlight_part(text):
 def get_abbrs(text, df_abbrs):
     """
     The function extracts abbreviations unknown for customers
-    :param text: str
+    :param text: str, df_abbrs: DataFrame
     :return: list
     """
     abbrs = re.findall(r'\b[А-Я][А-Я]+\b', text)
