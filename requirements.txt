@@ -91,8 +91,6 @@ preshed==3.0.5
 prometheus-client==0.11.0
 prompt-toolkit==3.0.21
 protobuf==3.19.0
-psycopg2==2.9.2
-psycopg2-binary==2.9.1
 ptyprocess==0.7.0
 pyarrow==6.0.0
 pyaspeller==0.2.0
