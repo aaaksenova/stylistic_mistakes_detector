@@ -21,7 +21,7 @@ st.sidebar.markdown("С замечаниями и предложениями п�
 
 @st.cache(suppress_st_warning=True)
 def read_abbr_file():
-    df_abbrs = pd.read_excel('abbreviations.xlsx')
+    df_abbrs = pd.read_excel('abbreviations.xlsx', engine='openpyxl',)
     return df_abbrs
 
 
