@@ -285,7 +285,7 @@ def detect_differences(text1, text2):
     txt2_list = text2.split()
 
     diff = difflib.unified_diff(txt1_list, txt2_list)
-    text_with_diff = '###'.join(diff)
+    text_with_diff = '###'.join(diff) + '###'
     before = re.findall(r'###-(.+?)###', text_with_diff)
     after = re.findall(r'###\+(.+?)###', text_with_diff)
     return zip(before, after)
