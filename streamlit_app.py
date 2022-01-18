@@ -57,8 +57,8 @@ if run_processing:
                 st.markdown('*Я убрал точку в конце*')
             if differences:
                 st.markdown('*Были исправлены опечатки:*')
-                for before, after in differences:
-                    st.markdown(f'*{before} –> {after}*')
+                for diff in differences:
+                    st.markdown(f'*{diff}*')
             if st.session_state['bad_abbrs']:
                 if len(st.session_state['bad_abbrs']) > 1:
                     st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(st.session_state['bad_abbrs']))

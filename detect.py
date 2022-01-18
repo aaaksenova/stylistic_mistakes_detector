@@ -291,4 +291,11 @@ def detect_differences(text1, text2):
     text_with_diff = '###'.join(diff) + '###'
     before = re.findall(r'###-(.+?)###', text_with_diff)
     after = re.findall(r'###\+(.+?)###', text_with_diff)
-    return zip(before, after)
+    collected_differences = []
+    if before:
+        for i, j in zip(before, after):
+            if i+' ➡️ '+j not in collected_differences:
+                collected_differences.append(i+' ➡️ '+j)
+        return collected_differences
+    else:
+        return ''
