@@ -40,6 +40,7 @@ if run_processing:
         st.session_state['bad_abbrs'] = bad_abbrs
         st.session_state['replce_abbrs'] = replace_abbrs
         formatted, st.session_state['flag_punct'] = detect.format_text(text_to_check)
+        differences = detect.detect_differences(text_to_check, formatted)
         passive_checked = detect.highlight_passive(formatted)
         bad_checked = detect.highlight_bad_words(passive_checked)
         particips = detect.highlight_part(bad_checked)
@@ -53,6 +54,10 @@ if run_processing:
                 st.markdown(metric)
             if st.session_state['flag_punct']:
                 st.markdown('*Я убрал точку в конце*')
+            if differences:
+                st.markdown('*Были исправлены опечатки:*')
+                for before, after in differences:
+                    st.markdown(f'*{before} –> {after}*')
             if st.session_state['bad_abbrs']:
                 if len(st.session_state['bad_abbrs']) > 1:
                     st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(st.session_state['bad_abbrs']))

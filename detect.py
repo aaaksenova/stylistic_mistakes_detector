@@ -3,6 +3,7 @@ import numpy as np
 import re
 import spacy
 from pyaspeller import YandexSpeller
+import difflib
 
 
 speller = YandexSpeller()
@@ -278,3 +279,13 @@ def get_abbrs(text, df_abbrs):
     else:
         return '', '', text
 
+
+def detect_differences(text1, text2):
+    txt1_list = text1.split()
+    txt2_list = text2.split()
+
+    diff = difflib.unified_diff(txt1_list, txt2_list)
+    text_with_diff = '###'.join(diff)
+    before = re.findall(r'###-(.+?)###', text_with_diff)
+    after = re.findall(r'###\+(.+?)###', text_with_diff)
+    return zip(before, after)
