@@ -3,8 +3,7 @@ import streamlit as st
 import pandas as pd
 
 
-title = '<p style="font-family-sans-serif; color:Green; font-size: 42px;">СберГлавред</p>'
-st.markdown(title, unsafe_allow_html=True)
+st.title('СберГлавред')
 st.sidebar.subheader("Это инструмент для выявления стилистических ошибок в тексте")
 st.sidebar.markdown('''<span style="color:green">Таким</span> цветом выделяются канцеляризмы и вводные слова \n''',
                     unsafe_allow_html=True)
