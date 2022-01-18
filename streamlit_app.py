@@ -39,8 +39,9 @@ if run_processing:
         bad_abbrs, replace_abbrs, text_to_check = detect.get_abbrs(text_to_check, df_abbrs)
         st.session_state['bad_abbrs'] = bad_abbrs
         st.session_state['replce_abbrs'] = replace_abbrs
-        formatted, st.session_state['flag_punct'] = detect.format_text(text_to_check)
+        formatted = detect.format_text(text_to_check)
         differences = detect.detect_differences(text_to_check, formatted)
+        formatted, st.session_state['flag_punct'] = detect.format_punct(text_to_check)
         passive_checked = detect.highlight_passive(formatted)
         bad_checked = detect.highlight_bad_words(passive_checked)
         particips = detect.highlight_part(bad_checked)

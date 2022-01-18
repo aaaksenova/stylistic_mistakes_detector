@@ -66,15 +66,18 @@ def format_text(text):
     :param text: str
     :return: str, bool
     """
-    # abbrs = list(set(re.findall(r'[А-Я][А-Я]+\b', text)))  # Собираем аббревиатуры для замен
-    text = re.sub(' %', '%', text)  # Убираем пробел перед %
-    text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
-    text = re.sub('\b - \b', '\b – \b', text)  # Выравниваем тире
     text = speller.spelled(text)  # Исправляем орфографию
     you_list = ['Вы', 'Вас', 'Вам', 'Вами']
     for i in you_list:  # Меняем Вы на нижний регистр
         text = re.sub(r'([^\.!\?] )\b{}\b'.format(i), r'\1{}'.format(i.lower()), text)
     text = re.sub(r'Ваш', r'ваш', text)  # Меняем Ваш на нижний регистр
+    return text
+
+
+def format_punct(text):
+    text = re.sub(' %', '%', text)  # Убираем пробел перед %
+    text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
+    text = re.sub('\b - \b', '\b – \b', text)  # Выравниваем тире
     text_new = text.strip('.')
     flag_punct = 0
     if text_new != text:
