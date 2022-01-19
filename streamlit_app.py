@@ -27,6 +27,10 @@ def read_abbr_file():
 
 df_abbrs = read_abbr_file()
 
+@st.cache(suppress_st_warning=True)
+def read_abbr_file():
+    df_abbrs = pd.read_excel('abbreviations.xlsx', engine='openpyxl',)
+    return df_abbrs
 
 with st.form(key='my_form'):
     text_to_check = st.text_area(label='Введите текст')
@@ -43,7 +47,8 @@ if run_processing:
         differences = detect.detect_differences(text_to_check, formatted)
         formatted, st.session_state['flag_punct'] = detect.format_punct(formatted)
         passive_checked = detect.highlight_passive(formatted)
-        bad_checked = detect.highlight_bad_words(passive_checked)
+        bad_checked, detected_bad_words = detect.highlight_bad_words(passive_checked)
+        st.session_state['bad_words'] = bad_words
         particips = detect.highlight_part(bad_checked)
         verbs = detect.highlight_verbs(particips)
         st.session_state['output'] = detect.highlight_nouns(verbs)
@@ -68,4 +73,7 @@ if run_processing:
                 st.markdown('*Замените: *')
                 for abbr in st.session_state['replce_abbrs'].keys():
                     st.markdown(abbr + ' на ' + st.session_state['replce_abbrs'][abbr])
+            if st.session_state['bad_words']:
+                for suggestion in st.session_state['bad_words']:
+                    st.markdown(suggestion)
         st.session_state.clear()

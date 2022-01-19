@@ -4,6 +4,7 @@ import re
 import spacy
 from pyaspeller import YandexSpeller
 import difflib
+import os
 
 
 speller = YandexSpeller()
@@ -22,6 +23,14 @@ stop_phrases = """не требуется, ввиду, на предмет, в �
 
 stop_words = stop_words.split(', ')
 stop_words = {word: ' '.join([w.lemma_ for w in model(word)]) for word in stop_words}
+
+
+def prepare_glavred_data():
+    glavred_params = {}
+    for file in os.listdir('./support_data'):
+        glavred_params[file.split('.')[0]] = open(os.path.join('./support_data', file)).read().split('\n')
+        glavred_params[file.split('.')[0]] = {i : j for i, j in glavred_params[file.split('.')[0]].split(',')}
+    return glavred_params
 
 
 def complexity_analytics(text):
@@ -88,7 +97,7 @@ def format_punct(text):
     return text_new, flag_punct
 
 
-def highlight_bad_words(text):
+def highlight_bad_words(text, glavred_params):
     """
     The function highlights words stylistically inappropriate
     for the given text based on word dictionary
@@ -100,14 +109,17 @@ def highlight_bad_words(text):
     for sent in sents:
         doc = model(sent)
         for w in doc:
-            if w.lemma_ in stop_words.keys() and w.text not in detected:
-                detected.append(w.text)
-                text = re.sub(w.text, '''<span style="color:green">''' + w.text + '</span>', text)
-    for stop_phrase in stop_phrases.split(', '):
-        text = re.sub(stop_phrase, '''<span style="color:green">''' + stop_phrase + '</span>', text)
-        text = re.sub(stop_phrase.capitalize(), \
-                      '''<span style="color:green">''' + stop_phrase.capitalize() + '</span>', text)
-    return text
+            for key in glavred_params.keys():
+                if 'fixed' not in key:
+                    if w.lemma_ in glavred_params[key].keys() and w.text not in detected:
+                        if glavred_params[key][w.lemma_] != '':
+                            detected.append(w.lemma_ + ' можно заменить на ' + glavred_params[key][w.lemma_])
+                        text = re.sub(w.text, '''<span style="color:green">''' + w.text + '</span>', text)
+    for phrase in glavred_params['fixed_phrases'].keys():
+        text = re.sub(phrase, '''<span style="color:green">''' + phrase + '</span>', text)
+        text = re.sub(phrase.capitalize(), \
+                      '''<span style="color:green">''' + phrase.capitalize() + '</span>', text)
+    return text, detected
 
 
 def checkForSentType(inputSentence):
