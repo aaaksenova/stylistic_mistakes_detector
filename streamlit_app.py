@@ -51,7 +51,7 @@ if run_processing:
         st.session_state['metrics'] = detect.complexity_analytics(text_to_check)
         bad_abbrs, replace_abbrs, text_to_check = detect.get_abbrs(text_to_check, df_abbrs)
         st.session_state['bad_abbrs'] = bad_abbrs
-        st.session_state['replce_abbrs'] = replace_abbrs
+        st.session_state['replace_abbrs'] = replace_abbrs
         formatted = detect.format_text(text_to_check)
         differences = detect.detect_differences(text_to_check, formatted)
         formatted, st.session_state['flag_punct'] = detect.format_punct(formatted)
@@ -78,10 +78,10 @@ if run_processing:
                     st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(st.session_state['bad_abbrs']))
                 else:
                     st.markdown('*Расшифруйте аббревиатуру: *' + st.session_state['bad_abbrs'][0])
-            if st.session_state['replce_abbrs']:
+            if st.session_state['replace_abbrs']:
                 st.markdown('*Замените: *')
-                for abbr in st.session_state['replce_abbrs'].keys():
-                    st.markdown(abbr + ' на ' + st.session_state['replce_abbrs'][abbr])
+                for abbr in st.session_state['replace_abbrs'].keys():
+                    st.markdown(abbr + ' на ' + st.session_state['replace_abbrs'][abbr])
             if st.session_state['bad_words']:
                 for suggestion in st.session_state['bad_words']:
                     st.markdown(suggestion)
