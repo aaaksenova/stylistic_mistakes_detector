@@ -77,7 +77,9 @@ def format_text(text):
 def format_punct(text):
     text = re.sub(' %', '%', text)  # Убираем пробел перед %
     text = re.sub(r'[\'\"„](.+?)[\'\"“]', r'«\1»', text, flags=re.DOTALL)  # Приводим кавычки к одному виду
-    text = re.sub('\b - \b', '\b – \b', text)  # Выравниваем тире
+    text = re.sub('\b - \b', '\b — \b', text)  # Выравниваем тире и добавляем неразрывный пробел
+    text = re.sub(r'№(\d)', r'№ \1', text)  # После номера, но перед числом пробел
+    text = re.sub(r'(\d)( *?Р\.*)|( *?[рР]уб\.*)', r'\1 ₽', text)  # Приводим разные написания рубля к одному виду
     text_new = text.strip('.')
     flag_punct = 0
     if text_new != text:
