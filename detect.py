@@ -296,8 +296,8 @@ def detect_differences(text1, text2):
     collected_differences = []
     if before:
         for i, j in zip(before, after):
-            if i+' ➡️ '+j not in collected_differences:
-                collected_differences.append(i+' ➡️ '+j)
+            if i+' → '+j not in collected_differences:
+                collected_differences.append(i+' → '+j)
         return collected_differences
     else:
         return ''
