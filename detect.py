@@ -228,6 +228,9 @@ def highlight_nouns(text):
     text = '. '.join(text_upd)
     text = text.replace('START', '''<span style="color:orange;">''').replace('STOP', '</span>')
     text = re.sub(r'(' + r'[Пп]ри \w+[ит]и\b' + r')', r'START\1STOP', text)
+    text = re.sub(r'(' + r'[Пп]осле \w+ия\b' + r')', r'START\1STOP', text)
+    text = re.sub(r'(' + r'([Мм]ероприятия|[Дд]еятельность) по \w+\b' + r')', r'START\1STOP', text)
+    text = re.sub(r'(' + r'([Нн]аправленн[ыао][йяе]) на \w+\b' + r')', r'START\1STOP', text)
     text = text.replace('START', '''<span style="color:orange;">''').replace('STOP', '</span>')
     return text
 
