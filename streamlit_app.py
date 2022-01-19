@@ -1,6 +1,7 @@
 import detect
 import streamlit as st
 import pandas as pd
+import os
 
 
 st.title('СберГлавред')
@@ -27,10 +28,18 @@ def read_abbr_file():
 
 df_abbrs = read_abbr_file()
 
+
 @st.cache(suppress_st_warning=True)
-def read_abbr_file():
-    df_abbrs = pd.read_excel('abbreviations.xlsx', engine='openpyxl',)
-    return df_abbrs
+def prepare_glavred_data():
+    glavred_params = {}
+    for file in os.listdir('./support_data'):
+        glavred_params[file.split('.')[0]] = open(os.path.join('./support_data', file)).read().split('\n')
+        glavred_params[file.split('.')[0]] = {i : j for i, j in glavred_params[file.split('.')[0]].split(',')}
+    return glavred_params
+
+
+glavred_params = prepare_glavred_data()
+
 
 with st.form(key='my_form'):
     text_to_check = st.text_area(label='Введите текст')
@@ -47,8 +56,8 @@ if run_processing:
         differences = detect.detect_differences(text_to_check, formatted)
         formatted, st.session_state['flag_punct'] = detect.format_punct(formatted)
         passive_checked = detect.highlight_passive(formatted)
-        bad_checked, detected_bad_words = detect.highlight_bad_words(passive_checked)
-        st.session_state['bad_words'] = bad_words
+        bad_checked, detected_bad_words = detect.highlight_bad_words(passive_checked, glavred_params)
+        st.session_state['bad_words'] = detected_bad_words
         particips = detect.highlight_part(bad_checked)
         verbs = detect.highlight_verbs(particips)
         st.session_state['output'] = detect.highlight_nouns(verbs)

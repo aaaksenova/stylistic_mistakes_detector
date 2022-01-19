@@ -4,7 +4,7 @@ import re
 import spacy
 from pyaspeller import YandexSpeller
 import difflib
-import os
+
 
 
 speller = YandexSpeller()
@@ -24,13 +24,6 @@ stop_phrases = """не требуется, ввиду, на предмет, в �
 stop_words = stop_words.split(', ')
 stop_words = {word: ' '.join([w.lemma_ for w in model(word)]) for word in stop_words}
 
-
-def prepare_glavred_data():
-    glavred_params = {}
-    for file in os.listdir('./support_data'):
-        glavred_params[file.split('.')[0]] = open(os.path.join('./support_data', file)).read().split('\n')
-        glavred_params[file.split('.')[0]] = {i : j for i, j in glavred_params[file.split('.')[0]].split(',')}
-    return glavred_params
 
 
 def complexity_analytics(text):
