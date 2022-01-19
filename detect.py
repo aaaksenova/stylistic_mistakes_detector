@@ -6,24 +6,8 @@ from pyaspeller import YandexSpeller
 import difflib
 
 
-
 speller = YandexSpeller()
 model = spacy.load('ru_core_news_md')
-# Словарь ненужных слов:
-stop_words = """эквайринг, полученный, абсолютно, действительно, гарантированно, очень, необходимый, необходимо, \
-самый, наиболее, являться, проинформировать, осуществляться, производить, осуществлять, производиться, надлежащий, \
-данный, соответствующий, всесторонний, выполнять, дальнейший, значительный, изложенный, какой-либо, \
-максимально, совершение, совершить, произвести, надлежащий, данное, списание, оказание, реальный, наиболее, \
-немаловажный, немаловажно, обеспечить, обеспечивать, подвергаться, подвергнуться, позволять, соответственно, \
-функционировать, каковой, вышеуказанный, вышеупомянутый"""
-
-stop_phrases = """не требуется, ввиду, на предмет, в качестве, \
-в целях, в настоящее время, в рамках, во избежание, в связи, по причине, в случае, таким образом, \
-на протяжении, на текущий момент, в должной мере, по прошествии"""
-
-stop_words = stop_words.split(', ')
-stop_words = {word: ' '.join([w.lemma_ for w in model(word)]) for word in stop_words}
-
 
 
 def complexity_analytics(text):
@@ -106,7 +90,7 @@ def highlight_bad_words(text, glavred_params):
                 if 'fixed' not in key:
                     if w.lemma_ in glavred_params[key].keys() and w.text not in detected:
                         if glavred_params[key][w.lemma_] != '':
-                            detected.append(w.lemma_ + ' можно заменить на ' + glavred_params[key][w.lemma_])
+                            detected.append(w.lemma_ + ' на ' + glavred_params[key][w.lemma_])
                         text = re.sub(w.text, '''<span style="color:green">''' + w.text + '</span>', text)
     for phrase in glavred_params['fixed_phrases'].keys():
         text = re.sub(phrase, '''<span style="color:green">''' + phrase + '</span>', text)
