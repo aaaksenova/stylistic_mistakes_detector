@@ -84,6 +84,7 @@ if run_processing:
                 for abbr in st.session_state['replace_abbrs'].keys():
                     st.markdown(abbr + ' на ' + st.session_state['replace_abbrs'][abbr])
             if st.session_state['bad_words']:
+                st.markdown('*Возможно, стоит заменить: *')
                 for suggestion in st.session_state['bad_words']:
                     st.markdown(suggestion.capitalize())
         st.session_state.clear()
