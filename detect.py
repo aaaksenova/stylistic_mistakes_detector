@@ -67,6 +67,7 @@ def format_punct(text):
     text = re.sub(r'№(\d)', r'№ \1', text)  # После номера, но перед числом пробел
     text = re.sub(r'(\d)( *?Р\.*)|( *?[рР]уб\.*)', r'\1 ₽', text)  # Приводим разные написания рубля к одному виду
     text = re.sub(r'(\d{2})/(\d{2})/(\d{4})', r'\1\.\2\.\3', text)  # Форматируем даты
+    text = re.sub(r'\b,\b', r', ', text)  # Форматируем запятые
     text_new = text.strip('.')
     flag_punct = 0
     if text_new != text:
