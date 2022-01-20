@@ -84,6 +84,7 @@ def highlight_bad_words(text, glavred_params):
     """
     sents = text.split('.')
     detected = []
+    detected_out = []
     for sent in sents:
         doc = model(sent)
         for w in doc:
@@ -91,7 +92,8 @@ def highlight_bad_words(text, glavred_params):
                 if 'fixed' not in key:
                     if w.lemma_ in glavred_params[key].keys() and w.text not in detected:
                         if glavred_params[key][w.lemma_] != '':
-                            detected.append(w.lemma_ + ' на ' + glavred_params[key][w.lemma_])
+                            detected.append(w.text)
+                            detected_out.append(w.lemma_ + ' на ' + glavred_params[key][w.lemma_])
                         text = re.sub(w.text, '''<span style="color:green">''' + w.text + '</span>', text)
     for phrase in glavred_params['fixed_phrases'].keys():
         text = re.sub(phrase, '''<span style="color:green">''' + phrase + '</span>', text)
