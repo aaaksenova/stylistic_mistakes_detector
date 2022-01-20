@@ -91,15 +91,15 @@ def highlight_bad_words(text, glavred_params):
             for key in glavred_params.keys():
                 if 'fixed' not in key:
                     if w.lemma_ in glavred_params[key].keys() and w.text not in detected:
+                        detected.append(w.text)
                         if glavred_params[key][w.lemma_] != '':
-                            detected.append(w.text)
                             detected_out.append(w.lemma_ + ' на ' + glavred_params[key][w.lemma_])
                         text = re.sub(w.text, '''<span style="color:green">''' + w.text + '</span>', text)
     for phrase in glavred_params['fixed_phrases'].keys():
         text = re.sub(phrase, '''<span style="color:green">''' + phrase + '</span>', text)
         text = re.sub(phrase.capitalize(), \
                       '''<span style="color:green">''' + phrase.capitalize() + '</span>', text)
-    return text, detected
+    return text, detected_out
 
 
 def checkForSentType(inputSentence):
