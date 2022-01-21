@@ -46,9 +46,7 @@ with st.form(key='my_form'):
     text_to_check = st.text_area(label='Введите текст')
     run_processing = st.form_submit_button(label="Обработать")
 if run_processing:
-    if not text_to_check:
-        st.session_state['output'] = '*Хм, сначала введите текст*'
-    else:
+    try:
         st.session_state['metrics'] = detect.complexity_analytics(text_to_check)
         bad_abbrs, replace_abbrs, text_to_check = detect.get_abbrs(text_to_check, df_abbrs)
         st.session_state['bad_abbrs'] = bad_abbrs
@@ -88,3 +86,5 @@ if run_processing:
                     for suggestion in st.session_state['bad_words']:
                         st.markdown(suggestion.capitalize())
             st.session_state.clear()
+    except KeyError:
+        st.markdown("*Хм, сначала введите текст*")
