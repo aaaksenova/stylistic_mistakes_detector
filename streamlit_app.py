@@ -62,29 +62,29 @@ if run_processing:
         particips = detect.highlight_part(bad_checked)
         verbs = detect.highlight_verbs(particips)
         st.session_state['output'] = detect.highlight_nouns(verbs)
-    st.markdown('\n')
-    st.markdown(st.session_state['output'], unsafe_allow_html=True)
-    if st.session_state['metrics']:
-        with st.expander('Открыть комментарии'):
-            for metric in st.session_state['metrics']:
-                st.markdown(metric)
-            if st.session_state['flag_punct']:
-                st.markdown('*Я убрал точку в конце*')
-            if differences:
-                st.markdown('*Были исправлены опечатки:*')
-                for diff in differences:
-                    st.markdown(f'*{diff}*')
-            if st.session_state['bad_abbrs']:
-                if len(st.session_state['bad_abbrs']) > 1:
-                    st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(st.session_state['bad_abbrs']))
-                else:
-                    st.markdown('*Расшифруйте аббревиатуру: *' + st.session_state['bad_abbrs'][0])
-            if st.session_state['replace_abbrs']:
-                st.markdown('*Замените: *')
-                for abbr in st.session_state['replace_abbrs'].keys():
-                    st.markdown(abbr + ' на ' + st.session_state['replace_abbrs'][abbr])
-            if st.session_state['bad_words']:
-                st.markdown('*Возможно, стоит заменить: *')
-                for suggestion in st.session_state['bad_words']:
-                    st.markdown(suggestion.capitalize())
-        st.session_state.clear()
+        st.markdown('\n')
+        st.markdown(st.session_state['output'], unsafe_allow_html=True)
+        if st.session_state['metrics']:
+            with st.expander('Открыть комментарии'):
+                for metric in st.session_state['metrics']:
+                    st.markdown(metric)
+                if st.session_state['flag_punct']:
+                    st.markdown('*Я убрал точку в конце*')
+                if differences:
+                    st.markdown('*Были исправлены опечатки:*')
+                    for diff in differences:
+                        st.markdown(f'*{diff}*')
+                if st.session_state['bad_abbrs']:
+                    if len(st.session_state['bad_abbrs']) > 1:
+                        st.markdown('*Расшифруйте аббревиатуры: *' + ', '.join(st.session_state['bad_abbrs']))
+                    else:
+                        st.markdown('*Расшифруйте аббревиатуру: *' + st.session_state['bad_abbrs'][0])
+                if st.session_state['replace_abbrs']:
+                    st.markdown('*Замените: *')
+                    for abbr in st.session_state['replace_abbrs'].keys():
+                        st.markdown(abbr + ' на ' + st.session_state['replace_abbrs'][abbr])
+                if st.session_state['bad_words']:
+                    st.markdown('*Возможно, стоит заменить: *')
+                    for suggestion in st.session_state['bad_words']:
+                        st.markdown(suggestion.capitalize())
+            st.session_state.clear()
