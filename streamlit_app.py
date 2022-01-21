@@ -61,7 +61,7 @@ if run_processing:
         particips = detect.highlight_part(bad_checked)
         verbs = detect.highlight_verbs(particips)
         st.session_state['output'] = detect.highlight_nouns(verbs)
-        st.session_state['output'] = re.sub(r'(<span.+>).+?<span.+?>(.+?)</span>(.+?</span>)', r'\1\2\3',
+        st.session_state['output'] = re.sub(r'(<span.+>.+?)<span.+?>(.+?)</span>(.+?</span>)', r'\1\2\3',
                                             st.session_state['output'])
         st.markdown('\n')
         st.markdown(st.session_state['output'], unsafe_allow_html=True)
