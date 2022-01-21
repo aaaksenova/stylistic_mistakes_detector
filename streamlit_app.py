@@ -86,5 +86,5 @@ if run_processing:
                     for suggestion in st.session_state['bad_words']:
                         st.markdown(suggestion.capitalize())
             st.session_state.clear()
-        else:
-            st.markdown("*Хм, сначала введите текст*")
+    else:
+        st.markdown("*Хм, сначала введите текст*")
