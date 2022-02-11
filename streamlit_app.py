@@ -18,7 +18,7 @@ st.sidebar.markdown('''<span style="color:red">Таким</span> – сложн
 st.sidebar.markdown('''<span style="color:orange">Таким</span> – сложные конструкции существительных \n''',
                     unsafe_allow_html=True)
 st.sidebar.markdown("**Важно!** Этот инструмент лишь подсказывает возможные ошибки, но не гарантирует их наличие.")
-st.sidebar.markdown("С замечаниями и предложениями писать Анне Аксеновой *tg: aksenysh*")
+st.sidebar.markdown("С замечаниями и предложениями писать Анне Аксеновой *tg: aksenysh почта: aaleaksenova@sberbank.ru*")
 
 
 @st.cache(suppress_st_warning=True)
