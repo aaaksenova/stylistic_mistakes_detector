@@ -7,18 +7,46 @@ import re
 
 st.title('СберГлавред')
 st.sidebar.subheader("Это инструмент для выявления стилистических ошибок в тексте")
-st.sidebar.markdown('''<span style="color:green">Таким</span> цветом выделяются канцеляризмы и вводные слова \n''',
+st.sidebar.markdown('''<span style="color:green">Зеленым</span> цветом выделяются канцеляризмы и вводные слова \n''',
                     unsafe_allow_html=True)
-st.sidebar.markdown('''<span style="color:blue">Таким</span> – пассивные конструкции \n''',
+st.sidebar.markdown('''<span style="color:green">В настоящее время</span> клиентам могут начисляться бонусы на заказы, 
+оплаченные наличными 
+=> Сейчас вы получаете бонусы за каждый заказ, который оплатили наличными. \n''',
                     unsafe_allow_html=True)
-st.sidebar.markdown('''<span style="color:purple">Таким</span> – причастия и деепричастия \n''',
+st.sidebar.markdown('''<span style="color:blue">Синим</span> – пассивные конструкции \n''',
                     unsafe_allow_html=True)
-st.sidebar.markdown('''<span style="color:red">Таким</span> – сложные глагольные конструкции \n''',
+st.sidebar.markdown('''В чате <span style="color:blue">предоставляется только справочная информация</span> по продуктам 
+и услугам банка => В чате мы даём только справочную информацию \n''',
                     unsafe_allow_html=True)
-st.sidebar.markdown('''<span style="color:orange">Таким</span> – сложные конструкции существительных \n''',
+st.sidebar.markdown('''<span style="color:blue">Открытие вклада осуществляется </span> только в офисе банка или с 
+помощью мобильного приложения => Открыть вклад вы можете самостоятельно — это легко сделать в приложении 
+СберБанк Онлайн. Или приходите в офис с паспортом — мои коллеги помогут! \n''',
                     unsafe_allow_html=True)
-st.sidebar.markdown("**Важно!** Этот инструмент лишь подсказывает возможные ошибки, но не гарантирует их наличие.")
+st.sidebar.markdown('''<span style="color:purple">Фиолетовым</span> – причастия и деепричастия \n''',
+                    unsafe_allow_html=True)
+st.sidebar.markdown('''<span style="color:purple">Делая</span> перевод по номеру телефона в СберБанк Онлайн, вы экономите 
+время, <span style="color:purple">принадлежащее</span> вам и получателю => Переводите деньги по номеру телефона — 
+это быстрее, чем заполнять номер карты \n''',
+                    unsafe_allow_html=True)
+st.sidebar.markdown('''<span style="color:red">Красным</span> – сложные глагольные конструкции \n''',
+                    unsafe_allow_html=True)
+st.sidebar.markdown('''<span style="color:red">Могу порекомендовать вам обратиться</span> в отделение банка и предъявить 
+документ, удостоверяющий личность, чтобы обновить ваши паспортные данные => Приходите в офис банка с паспортом, 
+мои коллеги обновят данные. \n''',
+                    unsafe_allow_html=True)
+st.sidebar.markdown('''<span style="color:orange">Оранжевым</span> – сложные конструкции существительных \n''',
+                    unsafe_allow_html=True)
+st.sidebar.markdown('''Укажите <span style="color:orange">адрес офиса приобретения устройства</span> и данные сотрудника банка,
+ осуществлявшего помощь в покупке => Укажите адрес офиса, где покупали SberBox. А ещё будет здорово, если вы вспомните 
+ имя сотрудника, который помогал вам с покупкой. \n''',
+                    unsafe_allow_html=True)
+st.sidebar.markdown("**Важно!**"
+                    "Цвета обозначают ошибки разного типа, но не показывают их критичность."
+                    "Этот инструмент лишь подсказывает возможные ошибки, но не гарантирует их наличие.")
 st.sidebar.markdown("С замечаниями и предложениями писать Анне Аксеновой *tg: aksenysh почта: aaleaksenova@sberbank.ru*")
+
+
+
 
 
 @st.cache(suppress_st_warning=True)
