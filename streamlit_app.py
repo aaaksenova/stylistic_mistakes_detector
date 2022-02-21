@@ -10,31 +10,31 @@ st.sidebar.subheader("Это инструмент для выявления ст
 st.sidebar.markdown('''<span style="color:green">Зеленым</span> цветом выделяются канцеляризмы и вводные слова \n''',
                     unsafe_allow_html=True)
 with st.sidebar.expander('Пример'):
-    st.sidebar.markdown('''<span style="color:green">В настоящее время</span> клиентам могут начисляться бонусы на заказы, 
+    st.markdown('''<span style="color:green">В настоящее время</span> клиентам могут начисляться бонусы на заказы, 
     оплаченные наличными 
     => Сейчас вы получаете бонусы за каждый заказ, который оплатили наличными. \n''',
                         unsafe_allow_html=True)
 st.sidebar.markdown('''<span style="color:blue">Синим</span> – пассивные конструкции \n''',
                     unsafe_allow_html=True)
 with st.sidebar.expander('Пример'):
-    st.sidebar.markdown('''В чате <span style="color:blue">предоставляется только справочная информация</span> по продуктам 
+    st.markdown('''В чате <span style="color:blue">предоставляется только справочная информация</span> по продуктам 
     и услугам банка => В чате мы даём только справочную информацию \n''',
                         unsafe_allow_html=True)
-    st.sidebar.markdown('''<span style="color:blue">Открытие вклада осуществляется </span> только в офисе банка или с 
+    st.markdown('''<span style="color:blue">Открытие вклада осуществляется </span> только в офисе банка или с 
     помощью мобильного приложения => Открыть вклад вы можете самостоятельно — это легко сделать в приложении 
     СберБанк Онлайн. Или приходите в офис с паспортом — мои коллеги помогут! \n''',
                         unsafe_allow_html=True)
 st.sidebar.markdown('''<span style="color:purple">Фиолетовым</span> – причастия и деепричастия \n''',
                     unsafe_allow_html=True)
 with st.sidebar.expander('Пример'):
-    st.sidebar.markdown('''<span style="color:purple">Делая</span> перевод по номеру телефона в СберБанк Онлайн, вы экономите 
+    st.markdown('''<span style="color:purple">Делая</span> перевод по номеру телефона в СберБанк Онлайн, вы экономите 
     время, <span style="color:purple">принадлежащее</span> вам и получателю => Переводите деньги по номеру телефона — 
     это быстрее, чем заполнять номер карты \n''',
                         unsafe_allow_html=True)
 st.sidebar.markdown('''<span style="color:red">Красным</span> – сложные глагольные конструкции \n''',
                     unsafe_allow_html=True)
 with st.sidebar.expander('Пример'):
-    st.sidebar.markdown('''<span style="color:red">Могу порекомендовать вам обратиться</span> в отделение банка и предъявить 
+    st.markdown('''<span style="color:red">Могу порекомендовать вам обратиться</span> в отделение банка и предъявить 
     документ, удостоверяющий личность, чтобы обновить ваши паспортные данные => Приходите в офис банка с паспортом, 
     мои коллеги обновят данные. \n''',
                         unsafe_allow_html=True)
