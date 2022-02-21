@@ -41,7 +41,7 @@ with st.sidebar.expander('Пример'):
 st.sidebar.markdown('''<span style="color:orange">Оранжевым</span> – сложные конструкции существительных \n''',
                     unsafe_allow_html=True)
 with st.expander('Пример'):
-    st.sidebar.markdown('''Укажите <span style="color:orange">адрес офиса приобретения устройства</span> и данные сотрудника банка,
+    st.markdown('''Укажите <span style="color:orange">адрес офиса приобретения устройства</span> и данные сотрудника банка,
      осуществлявшего помощь в покупке => Укажите адрес офиса, где покупали SberBox. А ещё будет здорово, если вы вспомните 
      имя сотрудника, который помогал вам с покупкой. \n''',
                         unsafe_allow_html=True)
