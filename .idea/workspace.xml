@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0dc9a782-83c5-4ca4-aeb1-109869ae18f1" name="Default Changelist" comment="add files" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="21E2rZZfS0xtw9uVxUBcMWbDyPU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/support_data_upd" />
+      <recent name="$PROJECT_DIR$/support_data" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/main" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$USER_HOME$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.streamlit_app">
+    <configuration name="front" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stylistic_mistakes_detection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/front.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="streamlit_app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stylistic_mistakes_detection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/streamlit_app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stylistic_mistakes_detection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.streamlit_app" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.front" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0dc9a782-83c5-4ca4-aeb1-109869ae18f1" name="Default Changelist" comment="" />
+      <created>1637492126032</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1637492126032</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add files">
+      <created>1637497706619</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1637497706619</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add files">
+      <created>1637497734963</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1637497734963</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add files" />
+    <option name="LAST_COMMIT_MESSAGE" value="add files" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="224" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1642426124945">
+      <screen x="0" y="25" width="1792" height="1038" />
+    </state>
+    <state x="184" y="224" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.25.1792.1038@0.25.1792.1038" timestamp="1642426124945" />
+    <state width="1557" height="267" key="GridCell.Tab.0.bottom" timestamp="1646317306745">
+      <screen x="0" y="25" width="1792" height="1048" />
+    </state>
+    <state width="1558" height="281" key="GridCell.Tab.0.bottom/0.25.1792.1038@0.25.1792.1038" timestamp="1642780092468" />
+    <state width="1557" height="267" key="GridCell.Tab.0.bottom/0.25.1792.1048@0.25.1792.1048" timestamp="1646317306745" />
+    <state width="1557" height="267" key="GridCell.Tab.0.center" timestamp="1646317306745">
+      <screen x="0" y="25" width="1792" height="1048" />
+    </state>
+    <state width="1558" height="281" key="GridCell.Tab.0.center/0.25.1792.1038@0.25.1792.1038" timestamp="1642780092467" />
+    <state width="1557" height="267" key="GridCell.Tab.0.center/0.25.1792.1048@0.25.1792.1048" timestamp="1646317306745" />
+    <state width="1557" height="267" key="GridCell.Tab.0.left" timestamp="1646317306744">
+      <screen x="0" y="25" width="1792" height="1048" />
+    </state>
+    <state width="1558" height="281" key="GridCell.Tab.0.left/0.25.1792.1038@0.25.1792.1038" timestamp="1642780092466" />
+    <state width="1557" height="267" key="GridCell.Tab.0.left/0.25.1792.1048@0.25.1792.1048" timestamp="1646317306744" />
+    <state width="1557" height="267" key="GridCell.Tab.0.right" timestamp="1646317306745">
+      <screen x="0" y="25" width="1792" height="1048" />
+    </state>
+    <state width="1558" height="281" key="GridCell.Tab.0.right/0.25.1792.1038@0.25.1792.1038" timestamp="1642780092468" />
+    <state width="1557" height="267" key="GridCell.Tab.0.right/0.25.1792.1048@0.25.1792.1048" timestamp="1646317306745" />
+    <state x="497" y="277" width="670" height="675" key="search.everywhere.popup" timestamp="1638434478173">
+      <screen x="0" y="25" width="1792" height="1041" />
+    </state>
+    <state x="497" y="277" width="670" height="675" key="search.everywhere.popup/0.25.1792.1041@0.25.1792.1041" timestamp="1638434478173" />
+  </component>
+</project>

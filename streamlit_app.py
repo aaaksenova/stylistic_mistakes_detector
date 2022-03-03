@@ -65,9 +65,9 @@ df_abbrs = read_abbr_file()
 #@st.cache(suppress_st_warning=True)
 def prepare_glavred_data():
     glavred_params = {}
-    for file in os.listdir('./support_data'):
+    for file in os.listdir('./support_data_upd'):
         glavred_params[file.split('.')[0]] = open(os.path.join('./support_data', file)).read().strip().split('\n')
-        glavred_params[file.split('.')[0]] = {i.split(',')[0]: i.split(',')[1] for i in
+        glavred_params[file.split('.')[0]] = {i.split(';')[0]: i.split(';')[1] for i in
                                               glavred_params[file.split('.')[0]]}
     return glavred_params
 
