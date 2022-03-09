@@ -33,9 +33,9 @@ def complexity_analytics(text):
     sent_lens = max([len(sent.split()) for sent in text.split('. ')])
     warn_text = []
     if delta > 1:
-        warn_text.append('*Возможно, текст перегружен.*')
+        warn_text.append('')  #warn_text.append('*Возможно, текст перегружен.*')
     else:
-        warn_text.append('*Все метрики соблюдены.*')
+        warn_text.append('')  #warn_text.append('*Все метрики соблюдены.*')
     if sent_lens > 15:
         warn_text.append('*Предложения длинее 15 слов лучше разбивать на более короткие.*')
     return warn_text
